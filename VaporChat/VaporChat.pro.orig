@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,19 +19,30 @@ win32{
 }
 
 SOURCES += main.cpp\
+<<<<<<< HEAD
+        mainwindow.cpp \
+    networking.cpp
+
+HEADERS  += mainwindow.h \
+    networking.h
+=======
         mainwindow.cpp\
         registerwindow.cpp \
-    loginwindow.cpp \
-    networking.cpp
+    loginwindow.cpp
 
 HEADERS  += mainwindow.h\
          registerwindow.h \
-    loginwindow.h \
-    networking.h
+    loginwindow.h
+>>>>>>> c76aeba128d5647acd286b7ca33d190336781f8a
+
+<<<<<<< HEAD
 
 FORMS    += mainwindow.ui\
          registerwindow.ui \
     loginwindow.ui
+=======
+FORMS    += mainwindow.ui
 
 RESOURCES += \
     ressources.qrc
+>>>>>>> 14c952b6c218c185fec60e1ada9c1d8977c672ec

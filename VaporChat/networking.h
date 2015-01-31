@@ -5,8 +5,16 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QUrlQuery>
 #include <QtNetwork/QNetworkAccessManager>
+#include <QNetworkReply>
 
-void network();
+class myNetwork : public QObject
+{
+    Q_OBJECT
+    public:
+        void network();
+    private slots:
+        void replyFinished(QNetworkReply *reply);
+};
 
 #endif // NETWORKING_H
 
