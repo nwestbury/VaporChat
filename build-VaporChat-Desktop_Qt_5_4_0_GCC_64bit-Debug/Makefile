@@ -49,10 +49,12 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../VaporChat/main.cpp \
-		../VaporChat/mainwindow.cpp qrc_ressources.cpp \
+		../VaporChat/mainwindow.cpp \
+		../VaporChat/networking.cpp qrc_ressources.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		networking.o \
 		qrc_ressources.o \
 		moc_mainwindow.o
 DIST          = /opt/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
@@ -174,8 +176,10 @@ DIST          = /opt/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.4/gcc_64/mkspecs/features/exceptions.prf \
 		/opt/Qt/5.4/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.4/gcc_64/mkspecs/features/lex.prf \
-		../VaporChat/VaporChat.pro ../VaporChat/mainwindow.h ../VaporChat/main.cpp \
-		../VaporChat/mainwindow.cpp
+		../VaporChat/VaporChat.pro ../VaporChat/mainwindow.h \
+		../VaporChat/networking.h ../VaporChat/main.cpp \
+		../VaporChat/mainwindow.cpp \
+		../VaporChat/networking.cpp
 QMAKE_TARGET  = VaporChat
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = VaporChat
@@ -470,8 +474,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../VaporChat/ressources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../VaporChat/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../VaporChat/main.cpp ../VaporChat/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../VaporChat/mainwindow.h ../VaporChat/networking.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../VaporChat/main.cpp ../VaporChat/mainwindow.cpp ../VaporChat/networking.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../VaporChat/mainwindow.ui $(DISTDIR)/
 
 
@@ -990,6 +994,9 @@ mainwindow.o: ../VaporChat/mainwindow.cpp /opt/Qt/5.4/gcc_64/include/QtWidgets/Q
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../VaporChat/mainwindow.cpp
+
+networking.o: ../VaporChat/networking.cpp ../VaporChat/networking.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o networking.o ../VaporChat/networking.cpp
 
 qrc_ressources.o: qrc_ressources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_ressources.o qrc_ressources.cpp
