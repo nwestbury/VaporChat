@@ -12,12 +12,11 @@ TARGET = VaporChat
 TEMPLATE = app
 
 win32-msvc*: {
+    INCLUDEPATH += C:/OpenSSL-Win64/include
     LIBS += -L"C:/OpenSSL-Win64/lib" -llibeay32
 } else {
     LIBS += -llibeay32
 }
-
-INCLUDEPATH += C:/OpenSSL-Win64/include
 
 SOURCES += main.cpp\
         mainwindow.cpp
