@@ -27,9 +27,14 @@ HEADERS  += mainwindow.h\
          registerwindow.h \
     loginwindow.h
 
+<<<<<<< HEAD
+
 FORMS    += mainwindow.ui\
          registerwindow.ui \
     loginwindow.ui
+=======
+FORMS    += mainwindow.ui
 
 RESOURCES += \
     ressources.qrc
+>>>>>>> 14c952b6c218c185fec60e1ada9c1d8977c672ec

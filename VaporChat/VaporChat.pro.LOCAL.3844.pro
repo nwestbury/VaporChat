@@ -15,7 +15,7 @@ win32{
     INCLUDEPATH += C:/OpenSSL-Win64/include
     LIBS += -L"C:/OpenSSL-Win64/lib" -llibeay32
 } else {
-    LIBS += -lssl -lcrypto
+    LIBS += -llibeay32
 }
 
 SOURCES += main.cpp\
@@ -27,9 +27,7 @@ HEADERS  += mainwindow.h\
          registerwindow.h \
     loginwindow.h
 
+
 FORMS    += mainwindow.ui\
          registerwindow.ui \
     loginwindow.ui
-
-RESOURCES += \
-    ressources.qrc
