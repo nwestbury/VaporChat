@@ -19,8 +19,15 @@ win32-msvc*: {
 }
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp\
+        registerwindow.cpp \
+    loginwindow.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h\
+         registerwindow.h \
+    loginwindow.h
 
-FORMS    += mainwindow.ui
+
+FORMS    += mainwindow.ui\
+         registerwindow.ui \
+    loginwindow.ui
