@@ -15,7 +15,7 @@ win32-msvc*: {
     INCLUDEPATH += C:/OpenSSL-Win64/include
     LIBS += -L"C:/OpenSSL-Win64/lib" -llibeay32
 } else {
-    LIBS += -llibeay32
+    LIBS += -lssl -lcrypto
 }
 
 SOURCES += main.cpp\
@@ -24,3 +24,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    ressources.qrc

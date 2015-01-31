@@ -36,7 +36,7 @@ DISTNAME      = VaporChat1.0.0
 DISTDIR = /home/nico/Dropbox/Programming/VaporChat/VaporChat/.tmp/VaporChat1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/opt/Qt/5.4/gcc_64 -Wl,-rpath,/opt/Qt/5.4/gcc_64/lib
-LIBS          = $(SUBLIBS) -llibeay32 -L/opt/Qt/5.4/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lssl -lcrypto -L/opt/Qt/5.4/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -49,9 +49,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../VaporChat/main.cpp \
-		../VaporChat/mainwindow.cpp moc_mainwindow.cpp
+		../VaporChat/mainwindow.cpp qrc_ressources.cpp \
+		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		qrc_ressources.o \
 		moc_mainwindow.o
 DIST          = /opt/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.4/gcc_64/mkspecs/common/shell-unix.conf \
@@ -324,6 +326,7 @@ Makefile: ../VaporChat/VaporChat.pro /opt/Qt/5.4/gcc_64/mkspecs/linux-g++/qmake.
 		/opt/Qt/5.4/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.4/gcc_64/mkspecs/features/lex.prf \
 		../VaporChat/VaporChat.pro \
+		../VaporChat/ressources.qrc \
 		/opt/Qt/5.4/gcc_64/lib/libQt5Widgets.prl \
 		/opt/Qt/5.4/gcc_64/lib/libQt5Gui.prl \
 		/opt/Qt/5.4/gcc_64/lib/libQt5Core.prl
@@ -448,6 +451,7 @@ Makefile: ../VaporChat/VaporChat.pro /opt/Qt/5.4/gcc_64/mkspecs/linux-g++/qmake.
 /opt/Qt/5.4/gcc_64/mkspecs/features/yacc.prf:
 /opt/Qt/5.4/gcc_64/mkspecs/features/lex.prf:
 ../VaporChat/VaporChat.pro:
+../VaporChat/ressources.qrc:
 /opt/Qt/5.4/gcc_64/lib/libQt5Widgets.prl:
 /opt/Qt/5.4/gcc_64/lib/libQt5Gui.prl:
 /opt/Qt/5.4/gcc_64/lib/libQt5Core.prl:
@@ -465,6 +469,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../VaporChat/ressources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../VaporChat/mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../VaporChat/main.cpp ../VaporChat/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../VaporChat/mainwindow.ui $(DISTDIR)/
@@ -488,8 +493,15 @@ mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
 check: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_ressources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_ressources.cpp
+qrc_ressources.cpp: ../VaporChat/ressources.qrc \
+		../VaporChat/offline.png \
+		../VaporChat/online.png \
+		../VaporChat/hidden.png
+	/opt/Qt/5.4/gcc_64/bin/rcc -name ressources ../VaporChat/ressources.qrc -o qrc_ressources.cpp
+
 compiler_moc_header_make_all: moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp
@@ -629,13 +641,21 @@ moc_mainwindow.cpp: /opt/Qt/5.4/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qstyle.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qtabbar.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qrubberband.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QListWidget \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlistwidget.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlistview.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QMenuBar \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmenubar.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmenu.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QStatusBar \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qstatusbar.h \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/QToolBar \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/qtoolbar.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QVBoxLayout \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qboxlayout.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlayout.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
 		../VaporChat/mainwindow.h
 	/opt/Qt/5.4/gcc_64/bin/moc $(DEFINES) -I/opt/Qt/5.4/gcc_64/mkspecs/linux-g++ -I/home/nico/Dropbox/Programming/VaporChat/VaporChat -I/opt/Qt/5.4/gcc_64/include -I/opt/Qt/5.4/gcc_64/include/QtWidgets -I/opt/Qt/5.4/gcc_64/include/QtGui -I/opt/Qt/5.4/gcc_64/include/QtCore -I. ../VaporChat/mainwindow.h -o moc_mainwindow.cpp
@@ -654,7 +674,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -795,13 +815,21 @@ main.o: ../VaporChat/main.cpp ../VaporChat/mainwindow.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qstyle.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qtabbar.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qrubberband.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QListWidget \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlistwidget.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlistview.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QMenuBar \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmenubar.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmenu.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QStatusBar \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qstatusbar.h \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/QToolBar \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/qtoolbar.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QVBoxLayout \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qboxlayout.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlayout.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../VaporChat/main.cpp
 
@@ -916,20 +944,9 @@ mainwindow.o: ../VaporChat/mainwindow.cpp /opt/Qt/5.4/gcc_64/include/QtWidgets/Q
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QMessageBox \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmessagebox.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qdialog.h \
-		../VaporChat/mainwindow.h \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/QMainWindow \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmainwindow.h \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/qtabwidget.h \
-		/opt/Qt/5.4/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h \
-		/opt/Qt/5.4/gcc_64/include/QtCore/QVariant \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/QAction \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/qaction.h \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/qactiongroup.h \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/QButtonGroup \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/qbuttongroup.h \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/QHeaderView \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/qheaderview.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QListWidget \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlistwidget.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlistview.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qframe.h \
@@ -940,20 +957,42 @@ mainwindow.o: ../VaporChat/mainwindow.cpp /opt/Qt/5.4/gcc_64/include/QtWidgets/Q
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		/opt/Qt/5.4/gcc_64/include/QtGui/qvalidator.h \
 		/opt/Qt/5.4/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qicon.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qslider.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qabstractslider.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qstyle.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qtabbar.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qrubberband.h \
+		../VaporChat/mainwindow.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QMainWindow \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmainwindow.h \
+		ui_mainwindow.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/QVariant \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QAction \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qaction.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qactiongroup.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QButtonGroup \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QHeaderView \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qheaderview.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QMenuBar \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmenubar.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmenu.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QStatusBar \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qstatusbar.h \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/QToolBar \
-		/opt/Qt/5.4/gcc_64/include/QtWidgets/qtoolbar.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QVBoxLayout \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qboxlayout.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlayout.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../VaporChat/mainwindow.cpp
+
+qrc_ressources.o: qrc_ressources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_ressources.o qrc_ressources.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
