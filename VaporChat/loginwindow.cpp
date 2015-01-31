@@ -1,18 +1,26 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
 
+#include "registerwindow.h"
+
 loginWindow::loginWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::loginWindow)
 {
-    setupUi(this);
-    connect(loginButton, SIGNAL(clicked(bool)), this, SLOT(login());
-    connect(logRegisterButton, SIGNAL(clicked(bool)), this, SLOT(openRegisterWindow());
+    ui->setupUi(this);
+    connect(ui->loginButton, SIGNAL(clicked(bool)), this, SLOT(login()));
+    connect(ui->logRegisterButton, SIGNAL(clicked(bool)), this, SLOT(openRegisterWindow()));
 }
 
-loginWindow::login()
+void loginWindow::login()
 {
-    ~loginWindow();
+    delete ui;
+}
+
+void loginWindow::openRegisterWindow()
+{
+    registerWindow regWindow;
+    regWindow.show();
 }
 
 loginWindow::~loginWindow()

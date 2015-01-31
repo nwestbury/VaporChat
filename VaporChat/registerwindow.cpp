@@ -1,3 +1,4 @@
+#include <QApplication>
 #include "registerwindow.h"
 #include "ui_registerwindow.h"
 
@@ -5,13 +6,13 @@ registerWindow::registerWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::registerWindow)
 {
-    setupUi(this);
-    connect(registerButton, SIGNAL(clicked(bool)), this, SLOT(execRegister());
+    ui->setupUi(this);
+    connect(ui->registerButton, SIGNAL(clicked(bool)), this, SLOT(execRegister()));
 }
 
-registerWindow::execRegister()
+void registerWindow::execRegister()
 {
-    ~registerWindow();
+    delete ui;
 }
 
 registerWindow::~registerWindow()
