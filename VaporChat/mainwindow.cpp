@@ -1,14 +1,28 @@
+#include <QApplication>
+#include <QMessageBox>
+#include <QListWidget>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+mainWindow::mainWindow()
 {
-    ui->setupUi(this);
+    getFriendList();
+    setupUi(this);
+
+    for(int i=0; i<friends.size(); ++i){
+        QListWidgetItem *item = new QListWidgetItem (QIcon(":img/online.png"), friends.at(i), friendList);
+        friendList->addItem(item);
+    }
+
+    friendList->setSortingEnabled(true);
+    //friendList->sortingEnabled(true);
 }
 
-MainWindow::~MainWindow()
+mainWindow::~mainWindow()
 {
-    delete ui;
+}
+
+void mainWindow::getFriendList(){
+    friends << "Nico" << "James" << "Nathan";
 }

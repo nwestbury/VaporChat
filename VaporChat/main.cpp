@@ -14,10 +14,11 @@ void nathan_tests() {
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    mainWindow w;
     w.show();
 
-    nathan_tests();
+    if(strcmp(getenv("USERNAME"),"Jacob") == 0)
+        nathan_tests();
 
     return a.exec();
 }
