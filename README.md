@@ -1,2 +1,2 @@
 # VaporChat
-A public-source encrypted cross-platform chat program. 
+A public-key encrypted cross-platform chat program. 
