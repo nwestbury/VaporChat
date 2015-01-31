@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "ui_mainwindow.h"
 
-class mainWindow : public QMainWindow, Ui::MainWindow
+class mainWindow : public QMainWindow, Ui::mainWindow
 {
     Q_OBJECT
     QStringList friends;
@@ -13,12 +13,14 @@ class mainWindow : public QMainWindow, Ui::MainWindow
         mainWindow();
         ~mainWindow();
 
-    /*private:
-        Ui::mainWindow *ui;*/
+    private:
+        Ui::mainWindow *ui;
+        void getFriendList();
+
     /*signals:
         void message(const QString &username, const QString &text);
-        void action(const QString &username, const QString &text);*
-    private slots:
+        void action(const QString &username, const QString &text);*/
+    /*private slots:
         void textChangedSlot(const QString &newText);
         void sendClickedSlot();
         void loginWindow();
