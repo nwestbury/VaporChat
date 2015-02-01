@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
+CXXFLAGS      = -pipe -fpermissive -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 INCPATH       = -I/opt/Qt/5.4/gcc_64/mkspecs/linux-g++ -I../VaporChat -I/opt/Qt/5.4/gcc_64/include -I/opt/Qt/5.4/gcc_64/include/QtWidgets -I/opt/Qt/5.4/gcc_64/include/QtGui -I/opt/Qt/5.4/gcc_64/include/QtNetwork -I/opt/Qt/5.4/gcc_64/include/QtCore -I. -I. -I.
 QMAKE         = /opt/Qt/5.4/gcc_64/bin/qmake
 DEL_FILE      = rm -f
@@ -517,6 +517,7 @@ compiler_rcc_make_all: qrc_ressources.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_ressources.cpp
 qrc_ressources.cpp: ../VaporChat/ressources.qrc \
+		../VaporChat/certificate.crt \
 		../VaporChat/offline.png \
 		../VaporChat/online.png \
 		../VaporChat/hidden.png
@@ -981,6 +982,9 @@ moc_networking.cpp: /opt/Qt/5.4/gcc_64/include/QtCore/QUrl \
 		/opt/Qt/5.4/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/opt/Qt/5.4/gcc_64/include/QtNetwork/qssl.h \
 		/opt/Qt/5.4/gcc_64/include/QtCore/QFlags \
+		/opt/Qt/5.4/gcc_64/include/QtNetwork/QNetworkReply \
+		/opt/Qt/5.4/gcc_64/include/QtNetwork/qnetworkreply.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/QIODevice \
 		../VaporChat/networking.h
 	/opt/Qt/5.4/gcc_64/bin/moc $(DEFINES) -I/opt/Qt/5.4/gcc_64/mkspecs/linux-g++ -I/home/nico/Dropbox/Programming/VaporChat/VaporChat -I/opt/Qt/5.4/gcc_64/include -I/opt/Qt/5.4/gcc_64/include/QtWidgets -I/opt/Qt/5.4/gcc_64/include/QtGui -I/opt/Qt/5.4/gcc_64/include/QtNetwork -I/opt/Qt/5.4/gcc_64/include/QtCore -I. ../VaporChat/networking.h -o moc_networking.cpp
 
@@ -1161,6 +1165,7 @@ main.o: ../VaporChat/main.cpp ../VaporChat/mainwindow.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qlayoutitem.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
+		../VaporChat/networking.h \
 		/opt/Qt/5.4/gcc_64/include/QtCore/QUrl \
 		/opt/Qt/5.4/gcc_64/include/QtNetwork/QNetworkRequest \
 		/opt/Qt/5.4/gcc_64/include/QtNetwork/qnetworkrequest.h \
@@ -1180,7 +1185,16 @@ main.o: ../VaporChat/main.cpp ../VaporChat/mainwindow.h \
 		/opt/Qt/5.4/gcc_64/include/QtCore/qcryptographichash.h \
 		/opt/Qt/5.4/gcc_64/include/QtCore/qdatetime.h \
 		/opt/Qt/5.4/gcc_64/include/QtNetwork/qssl.h \
-		/opt/Qt/5.4/gcc_64/include/QtCore/QFlags
+		/opt/Qt/5.4/gcc_64/include/QtCore/QFlags \
+		/opt/Qt/5.4/gcc_64/include/QtNetwork/QNetworkReply \
+		/opt/Qt/5.4/gcc_64/include/QtNetwork/qnetworkreply.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/QIODevice \
+		/opt/Qt/5.4/gcc_64/include/QtCore/QFile \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QMessageBox \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmessagebox.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qdialog.h \
+		../VaporChat/dummyclient.cpp \
+		/opt/Qt/5.4/gcc_64/include/QtNetwork/QSslSocket
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../VaporChat/main.cpp
 
 mainwindow.o: ../VaporChat/mainwindow.cpp /opt/Qt/5.4/gcc_64/include/QtWidgets/QApplication \
@@ -1743,7 +1757,47 @@ networking.o: ../VaporChat/networking.cpp ../VaporChat/networking.h \
 		/opt/Qt/5.4/gcc_64/include/QtCore/qsharedpointer.h \
 		/opt/Qt/5.4/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/opt/Qt/5.4/gcc_64/include/QtNetwork/qssl.h \
-		/opt/Qt/5.4/gcc_64/include/QtCore/QFlags
+		/opt/Qt/5.4/gcc_64/include/QtCore/QFlags \
+		/opt/Qt/5.4/gcc_64/include/QtNetwork/QNetworkReply \
+		/opt/Qt/5.4/gcc_64/include/QtNetwork/qnetworkreply.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/QIODevice \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/QMessageBox \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qmessagebox.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qdialog.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/qline.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt/5.4/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt/5.4/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt/5.4/gcc_64/include/QtCore/QFile \
+		/opt/Qt/5.4/gcc_64/include/QtCore/QEventLoop \
+		/opt/Qt/5.4/gcc_64/include/QtCore/qeventloop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o networking.o ../VaporChat/networking.cpp
 
 qrc_ressources.o: qrc_ressources.cpp 

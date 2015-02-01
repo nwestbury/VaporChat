@@ -1,37 +1,54 @@
 #include "networking.h"
 #include <QMessageBox>
 
-void myNetwork::network(){
+// Parameters is an array of strings where each even index is the key and each odd is the data
+void myNetwork::network(QString &file, QStringList &parameters, const char * funcName, QMainWindow *obj){
+
+    /*QFile file(":/ssl/certificate.crt");
+    file.open(QIODevice::ReadOnly);
+    const QByteArray bytes = file.readAll();
+
+    // Create a certificate object
+    const QSslCertificate certificate(bytes);
+    const QList<QSslCertificate> list;
+    list << certificate;
+
+    // Add this certificate to all SSL connections
+    QSslConfiguration sslConfig;
+    sslConfig.setLocalCertificate(certificate);
+    sslConfig.setCaCertificates(list);
+    sslConfig.setProtocol(QSsl::TlsV1_2);
+    QSslSocket::addDefaultCaCertificate(certificate);*/
+
 
      QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+     manager->setNetworkAccessible(QNetworkAccessManager::Accessible);
 
-     // Read the SSL certificate
-     QFile file(":/ssl/api.xyz.com.crt");
-     file.open(QIODevice::ReadOnly);
-     const QByteArray bytes = file.readAll();
-
-     // Create a certificate object
-     const QSslCertificate certificate(bytes);
-
-     // Add this certificate to all SSL connections
-     QSslSocket::addDefaultCaCertificate(certificate);
-
-     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+      connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+     //connect(manager, SIGNAL(finished(QNetworkReply*)), obj, funcName);
 
      QNetworkRequest request;
-     request.setUrl(QUrl("http://107.181.166.77"));
+
+     //request.setSslConfiguration(sslConfig);
+     QString urlString = "http://107.181.166.77/" + file;
+
+     request.setUrl(QUrl(urlString));
      request.setRawHeader("User-Agent", "FakeBrowser 1.0");
 
-     QSslConfiguration sslConfiguration;
-     sslConfiguration.setProtocol(QSsl::SslV3);
+    QUrlQuery params;
+    for(int i=0; i<parameters.size(); i+=2){
+        params.addQueryItem(parameters[i], parameters[i+1]);
+    }
+    QByteArray data;
+    data.append(params.toString());
+    QNetworkReply * reply = manager->post(request, data);
 
-     request.setSslConfiguration(sslConfiguration);
+    QNetworkReply::NetworkError err = reply->error();
 
-    QNetworkReply * reply = manager->get(request);
+    connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
+            this, SLOT(error(QList<QSslError>)));
+    connect(reply, SIGNAL(finished()), this, SLOT(foo()));
 
-    QMessageBox messageBox;
-    messageBox.setText("WHAT?!");
-    messageBox.exec();
 }
 
 void myNetwork::replyFinished(QNetworkReply *reply){
@@ -43,4 +60,10 @@ void myNetwork::replyFinished(QNetworkReply *reply){
     messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     messageBox.setDefaultButton(QMessageBox::No);
     messageBox.exec();
+}
+
+void myNetwork::error(const QList<QSslError> err){
+    QMessageBox msgBox;
+    msgBox.setText(err[0].errorString());
+    msgBox.exec();
 }

@@ -1,0 +1,37 @@
+#include "mainwindow.h"
+#include "networking.h"
+#include <QApplication>
+
+<<<<<<< HEAD
+#include <QUrl>
+#include <QtNetwork/QNetworkRequest>
+#include <QUrlQuery>
+#include <QtNetwork/QNetworkAccessManager>
+=======
+
+#include "crypto.h"
+
+void nathan_tests() {
+    init_crypto();
+
+    char *pub, *priv;
+    createKeyPair("test", pub, priv);
+}
+>>>>>>> 04680fef31e9a58d6fd02be8e8e387b71c9b77a5
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    mainWindow w;
+    w.show();
+
+<<<<<<< HEAD
+    myNetwork n;
+    n.network();
+=======
+    if(strcmp(getenv("USERNAME"),"Jacob") == 0)
+        nathan_tests();
+>>>>>>> 04680fef31e9a58d6fd02be8e8e387b71c9b77a5
+
+    return a.exec();
+}

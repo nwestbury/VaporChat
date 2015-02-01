@@ -87,7 +87,7 @@ public:
     void retranslateUi(QMainWindow *mainWindow)
     {
         mainWindow->setWindowTitle(QApplication::translate("mainWindow", "MainWindow", 0));
-        label->setText(QApplication::translate("mainWindow", "Friend", 0));
+        label->setText(QApplication::translate("mainWindow", "Friends", 0));
     } // retranslateUi
 
 };

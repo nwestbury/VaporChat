@@ -9,6 +9,7 @@
 #include "../VaporChat/networking.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'networking.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -19,8 +20,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_myNetwork_t {
-    QByteArrayData data[5];
-    char stringdata[46];
+    QByteArrayData data[8];
+    char stringdata[73];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,11 +34,14 @@ QT_MOC_LITERAL(0, 0, 9), // "myNetwork"
 QT_MOC_LITERAL(1, 10, 13), // "replyFinished"
 QT_MOC_LITERAL(2, 24, 0), // ""
 QT_MOC_LITERAL(3, 25, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(4, 40, 5) // "reply"
+QT_MOC_LITERAL(4, 40, 5), // "reply"
+QT_MOC_LITERAL(5, 46, 5), // "error"
+QT_MOC_LITERAL(6, 52, 16), // "QList<QSslError>"
+QT_MOC_LITERAL(7, 69, 3) // "err"
 
     },
     "myNetwork\0replyFinished\0\0QNetworkReply*\0"
-    "reply"
+    "reply\0error\0QList<QSslError>\0err"
 };
 #undef QT_MOC_LITERAL
 
@@ -47,7 +51,7 @@ static const uint qt_meta_data_myNetwork[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -55,10 +59,12 @@ static const uint qt_meta_data_myNetwork[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   19,    2, 0x08 /* Private */,
+       1,    1,   24,    2, 0x08 /* Private */,
+       5,    1,   27,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 6,    7,
 
        0        // eod
 };
@@ -69,6 +75,7 @@ void myNetwork::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         myNetwork *_t = static_cast<myNetwork *>(_o);
         switch (_id) {
         case 0: _t->replyFinished((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        case 1: _t->error((*reinterpret_cast< const QList<QSslError>(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -79,6 +86,13 @@ void myNetwork::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QNetworkReply* >(); break;
+            }
+            break;
+        case 1:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QList<QSslError> >(); break;
             }
             break;
         }
@@ -110,13 +124,13 @@ int myNetwork::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

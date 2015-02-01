@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QNetworkReply>
 #include "ui_mainwindow.h"
 
 class mainWindow : public QMainWindow, Ui::mainWindow
@@ -16,6 +17,8 @@ class mainWindow : public QMainWindow, Ui::mainWindow
     private:
         Ui::mainWindow *ui;
         void getFriendList();
+     public slots:
+        void postRecieved(QNetworkReply* reply);
 
     /*signals:
         void message(const QString &username, const QString &text);
