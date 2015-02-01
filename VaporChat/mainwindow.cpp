@@ -103,6 +103,10 @@ void mainWindow::postRecieved(QNetworkReply* reply){
     childWindows[frnd]->session = sessionID.toInt();
     childWindows[frnd]->lastMsg = lastMsgID.toInt();
 
+    for (int i = 0; i<childWindows[frnd]->msgArray->size(); i++){
+        childWindows[frnd]->msgArray->removeAt(i);
+    }
+
     for (int i = 2; i<jsonArray.size(); i++){
         QJsonValue value = jsonArray.at(i);
         QJsonArray valueArray = value.toArray();
@@ -114,8 +118,7 @@ void mainWindow::postRecieved(QNetworkReply* reply){
     childWindows[frnd]->ui->textEdit->setText("");
 
     while (it < childWindows[frnd]->msgArray->end()) {
-        childWindows[frnd]->ui->textEdit->setText("");
-        childWindows[frnd]->ui->textEdit->appended(*it);
+        childWindows[frnd]->ui->textEdit->setText(*it);
         ++it;
     }
 }
