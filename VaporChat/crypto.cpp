@@ -146,6 +146,7 @@ int generateRandAESKey(char *buf, int buflen)
 
 
 ////////////////    OTHER CRYPTO CODE    ////////////////
+
 void bin2hex(char *bin, int binlen, char **hexout)
 {
     char *a = "0123456789abcdef";
