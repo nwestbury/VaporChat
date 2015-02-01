@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "networking.h"
 #include <QApplication>
+#include <QMessageBox>
 
 
 #include "crypto.h"

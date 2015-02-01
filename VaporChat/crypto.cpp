@@ -165,7 +165,7 @@ void hex2bin(char *hex, unsigned char **binout)
     char *a = "0123456789abcdef";
     int hexlen = strlen(hex);
     int binlen = hexlen/2;
-    *binout = (char *)malloc(strlen(hex)*2);
+    *binout = (unsigned char *)malloc(strlen(hex)*2);
 
     char character[2] = {0};
     for(int i = 0; i < hexlen; ++i) {

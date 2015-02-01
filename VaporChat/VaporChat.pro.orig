@@ -4,13 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = VaporChat
 TEMPLATE = app
-QMAKE_CXXFLAGS += -fpermissive
 
 win32{
     INCLUDEPATH += C:/OpenSSL-Win64/include
@@ -24,21 +23,28 @@ SOURCES += main.cpp\
 <<<<<<< HEAD
         registerwindow.cpp \
     loginwindow.cpp \
-    networking.cpp#\
-    #dummyclient.cpp
-    #crypto.cpp
+    networking.cpp \
+    chatwindow.cpp \
+    crypto.cpp
 
 HEADERS  += mainwindow.h\
          registerwindow.h \
     loginwindow.h \
-    networking.h #\
-    #crypto.h
+    networking.h \
+    chatwindow.h \
+    crypto.h
+
+FORMS    += mainwindow.ui\
+         registerwindow.ui \
+    loginwindow.ui \
+    chatwindow.ui
 =======
         registerwindow.cpp\
         loginwindow.cpp\
     	chatwindow.cpp\
 	networking.cpp \
-    	crypto.cpp
+        crypto.cpp \
+        chatwindow.cpp
 
 HEADERS  += mainwindow.h\
          registerwindow.h\
@@ -46,12 +52,12 @@ HEADERS  += mainwindow.h\
     	 chatwindow.h\
 	 networking.h\
     	 crypto.h
->>>>>>> 656de4d293d9a1ead7fc5401c92788f289a93260
 
 FORMS    += mainwindow.ui\
          registerwindow.ui\
          loginwindow.ui \
     	 chatwindow.ui
+>>>>>>> c917b1b08debee00566616d1c5139514892fa7fb
 
 RESOURCES += \
     ressources.qrc
