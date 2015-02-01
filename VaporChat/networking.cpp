@@ -20,9 +20,6 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
     sslConfig.setProtocol(QSsl::TlsV1_2);
     QSslSocket::addDefaultCaCertificate(certificate);*/
 
-     // Add this certificate to all SSL connections
-     QSslSocket::addDefaultCaCertificate(certificate);
-
      QNetworkAccessManager *manager = new QNetworkAccessManager(this);
      manager->setNetworkAccessible(QNetworkAccessManager::Accessible);
 
@@ -49,8 +46,6 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
 
     connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
             this, SLOT(error(QList<QSslError>)));
-    connect(reply, SIGNAL(finished()), this, SLOT(foo()));
-
 }
 
 void myNetwork::replyFinished(QNetworkReply *reply){

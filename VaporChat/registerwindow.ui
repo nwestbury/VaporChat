@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Register</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -54,14 +54,14 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>100</height>
+         <width>123</width>
+         <height>109</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>100</height>
+         <width>123</width>
+         <height>109</height>
         </size>
        </property>
        <property name="layoutDirection">
@@ -132,6 +132,9 @@
          <pointsize>12</pointsize>
         </font>
        </property>
+       <property name="maxLength">
+        <number>64</number>
+       </property>
       </widget>
      </item>
     </layout>
@@ -186,6 +189,9 @@
         <font>
          <pointsize>12</pointsize>
         </font>
+       </property>
+       <property name="maxLength">
+        <number>64</number>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
@@ -254,6 +260,9 @@
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="maxLength">
+        <number>64</number>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>

@@ -2,7 +2,7 @@
 #include "mainwindow.h"
 #include "networking.h"
 #include <QApplication>
-
+#include <QMessageBox>
 
 #include "crypto.h"
 #include "stdio.h"
@@ -40,9 +40,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    mainWindow w;
+    loginWindow w;
     w.show();
-
 	
     if(strcmp(getenv("USERNAME"), "Jacob") == 0)
         nathan_tests();

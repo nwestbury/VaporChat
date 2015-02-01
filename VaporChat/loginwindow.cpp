@@ -11,8 +11,8 @@ loginWindow::loginWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QPixmap icon = QPixmap(100, 100);
-    icon.load(":/img/smokeicon.png");
+    QPixmap icon = QPixmap(123, 109);
+    icon.load(":/img/VaporIcon.png");
     ui->iconLabel->setPixmap(icon);
 
     ui->loginButton->setStyleSheet("background-color: rgb(28, 184, 65, 70%)");
@@ -38,6 +38,7 @@ void loginWindow::login()
     }
 
     //Check if inputs are valid here
+
 
     //Forward to chat window
 
