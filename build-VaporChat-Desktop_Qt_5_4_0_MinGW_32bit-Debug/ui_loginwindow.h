@@ -18,6 +18,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -27,13 +28,17 @@ class Ui_loginWindow
 {
 public:
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_3;
+    QSpacerItem *horizontalSpacer;
     QLabel *iconLabel;
+    QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *horizontalLayout;
     QLabel *label_2;
     QLineEdit *logUsernameEdit;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLineEdit *logPasswordEdit;
+    QLabel *errorLabel;
     QPushButton *loginButton;
     QPushButton *logRegisterButton;
 
@@ -41,12 +46,18 @@ public:
     {
         if (loginWindow->objectName().isEmpty())
             loginWindow->setObjectName(QStringLiteral("loginWindow"));
-        loginWindow->resize(268, 350);
-        loginWindow->setMinimumSize(QSize(262, 350));
-        loginWindow->setMaximumSize(QSize(268, 350));
+        loginWindow->resize(268, 360);
+        loginWindow->setMinimumSize(QSize(268, 360));
+        loginWindow->setMaximumSize(QSize(268, 360));
         verticalLayout = new QVBoxLayout(loginWindow);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(6, 6, 6, 6);
+        verticalLayout->setContentsMargins(15, 15, 15, 0);
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer);
+
         iconLabel = new QLabel(loginWindow);
         iconLabel->setObjectName(QStringLiteral("iconLabel"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -54,25 +65,42 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(iconLabel->sizePolicy().hasHeightForWidth());
         iconLabel->setSizePolicy(sizePolicy);
-        iconLabel->setMinimumSize(QSize(250, 180));
-        iconLabel->setMaximumSize(QSize(250, 180));
+        iconLabel->setMinimumSize(QSize(100, 100));
+        iconLabel->setMaximumSize(QSize(100, 100));
 
-        verticalLayout->addWidget(iconLabel);
+        horizontalLayout_3->addWidget(iconLabel);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_2);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label_2 = new QLabel(loginWindow);
         label_2->setObjectName(QStringLiteral("label_2"));
-        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy);
-        label_2->setMinimumSize(QSize(50, 20));
+        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy1);
+        label_2->setMinimumSize(QSize(0, 30));
+        label_2->setMaximumSize(QSize(16777215, 30));
+        QFont font;
+        font.setPointSize(12);
+        label_2->setFont(font);
 
         horizontalLayout->addWidget(label_2);
 
         logUsernameEdit = new QLineEdit(loginWindow);
         logUsernameEdit->setObjectName(QStringLiteral("logUsernameEdit"));
-        logUsernameEdit->setMinimumSize(QSize(200, 20));
-        logUsernameEdit->setMaximumSize(QSize(200, 20));
+        sizePolicy1.setHeightForWidth(logUsernameEdit->sizePolicy().hasHeightForWidth());
+        logUsernameEdit->setSizePolicy(sizePolicy1);
+        logUsernameEdit->setMinimumSize(QSize(0, 30));
+        logUsernameEdit->setMaximumSize(QSize(16777215, 30));
+        logUsernameEdit->setFont(font);
 
         horizontalLayout->addWidget(logUsernameEdit);
 
@@ -80,23 +108,25 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(0);
+        horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         label = new QLabel(loginWindow);
         label->setObjectName(QStringLiteral("label"));
-        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy);
-        label->setMinimumSize(QSize(55, 20));
-        label->setMaximumSize(QSize(50, 20));
+        sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy1);
+        label->setMinimumSize(QSize(77, 30));
+        label->setMaximumSize(QSize(16777215, 30));
+        label->setFont(font);
 
         horizontalLayout_2->addWidget(label);
 
         logPasswordEdit = new QLineEdit(loginWindow);
         logPasswordEdit->setObjectName(QStringLiteral("logPasswordEdit"));
-        sizePolicy.setHeightForWidth(logPasswordEdit->sizePolicy().hasHeightForWidth());
-        logPasswordEdit->setSizePolicy(sizePolicy);
-        logPasswordEdit->setMinimumSize(QSize(200, 20));
-        logPasswordEdit->setMaximumSize(QSize(200, 20));
+        sizePolicy1.setHeightForWidth(logPasswordEdit->sizePolicy().hasHeightForWidth());
+        logPasswordEdit->setSizePolicy(sizePolicy1);
+        logPasswordEdit->setMinimumSize(QSize(0, 30));
+        logPasswordEdit->setMaximumSize(QSize(16777215, 30));
+        logPasswordEdit->setFont(font);
         logPasswordEdit->setEchoMode(QLineEdit::Password);
 
         horizontalLayout_2->addWidget(logPasswordEdit);
@@ -104,13 +134,34 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        errorLabel = new QLabel(loginWindow);
+        errorLabel->setObjectName(QStringLiteral("errorLabel"));
+        errorLabel->setMinimumSize(QSize(262, 20));
+        errorLabel->setMaximumSize(QSize(262, 20));
+
+        verticalLayout->addWidget(errorLabel);
+
         loginButton = new QPushButton(loginWindow);
         loginButton->setObjectName(QStringLiteral("loginButton"));
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(loginButton->sizePolicy().hasHeightForWidth());
+        loginButton->setSizePolicy(sizePolicy2);
+        loginButton->setMinimumSize(QSize(0, 40));
+        loginButton->setMaximumSize(QSize(16777215, 40));
+        QFont font1;
+        font1.setPointSize(12);
+        font1.setBold(false);
+        font1.setWeight(50);
+        loginButton->setFont(font1);
 
         verticalLayout->addWidget(loginButton);
 
         logRegisterButton = new QPushButton(loginWindow);
         logRegisterButton->setObjectName(QStringLiteral("logRegisterButton"));
+        logRegisterButton->setMinimumSize(QSize(0, 40));
+        logRegisterButton->setFont(font);
 
         verticalLayout->addWidget(logRegisterButton);
 
@@ -125,7 +176,9 @@ public:
         loginWindow->setWindowTitle(QApplication::translate("loginWindow", "Form", 0));
         iconLabel->setText(QString());
         label_2->setText(QApplication::translate("loginWindow", "Username:", 0));
+        logUsernameEdit->setText(QString());
         label->setText(QApplication::translate("loginWindow", "Password:", 0));
+        errorLabel->setText(QString());
         loginButton->setText(QApplication::translate("loginWindow", "Login", 0));
         logRegisterButton->setText(QApplication::translate("loginWindow", "Register", 0));
     } // retranslateUi

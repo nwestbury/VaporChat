@@ -2,14 +2,15 @@
 #define LOGINWINDOW_H
 
 #include <QWidget>
+#include "ui_loginwindow.h"
+#include "registerwindow.h"
+#include "chatwindow.h"
 
-namespace Ui {
-class loginWindow;
-}
-
-class loginWindow : public QWidget
+class loginWindow : public QWidget, Ui::loginWindow
 {
     Q_OBJECT
+    registerWindow regWindow;
+    chatWindow cWindow;
 
 public:
     explicit loginWindow(QWidget *parent = 0);

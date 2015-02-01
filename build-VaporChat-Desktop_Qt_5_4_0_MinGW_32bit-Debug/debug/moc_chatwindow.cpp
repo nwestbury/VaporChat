@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'registerwindow.h'
+** Meta object code from reading C++ file 'chatwindow.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.4.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../VaporChat/registerwindow.h"
+#include "../../VaporChat/chatwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'registerwindow.h' doesn't include <QObject>."
+#error "The header file 'chatwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.4.0. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -18,27 +18,27 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-struct qt_meta_stringdata_registerWindow_t {
+struct qt_meta_stringdata_chatWindow_t {
     QByteArrayData data[3];
-    char stringdata[29];
+    char stringdata[21];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_registerWindow_t, stringdata) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_chatWindow_t, stringdata) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_registerWindow_t qt_meta_stringdata_registerWindow = {
+static const qt_meta_stringdata_chatWindow_t qt_meta_stringdata_chatWindow = {
     {
-QT_MOC_LITERAL(0, 0, 14), // "registerWindow"
-QT_MOC_LITERAL(1, 15, 12), // "execRegister"
-QT_MOC_LITERAL(2, 28, 0) // ""
+QT_MOC_LITERAL(0, 0, 10), // "chatWindow"
+QT_MOC_LITERAL(1, 11, 8), // "sendChat"
+QT_MOC_LITERAL(2, 20, 0) // ""
 
     },
-    "registerWindow\0execRegister\0"
+    "chatWindow\0sendChat\0"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_registerWindow[] = {
+static const uint qt_meta_data_chatWindow[] = {
 
  // content:
        7,       // revision
@@ -60,42 +60,42 @@ static const uint qt_meta_data_registerWindow[] = {
        0        // eod
 };
 
-void registerWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void chatWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        registerWindow *_t = static_cast<registerWindow *>(_o);
+        chatWindow *_t = static_cast<chatWindow *>(_o);
         switch (_id) {
-        case 0: _t->execRegister(); break;
+        case 0: _t->sendChat(); break;
         default: ;
         }
     }
     Q_UNUSED(_a);
 }
 
-const QMetaObject registerWindow::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_registerWindow.data,
-      qt_meta_data_registerWindow,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+const QMetaObject chatWindow::staticMetaObject = {
+    { &QMainWindow::staticMetaObject, qt_meta_stringdata_chatWindow.data,
+      qt_meta_data_chatWindow,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
 
-const QMetaObject *registerWindow::metaObject() const
+const QMetaObject *chatWindow::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *registerWindow::qt_metacast(const char *_clname)
+void *chatWindow::qt_metacast(const char *_clname)
 {
     if (!_clname) return Q_NULLPTR;
-    if (!strcmp(_clname, qt_meta_stringdata_registerWindow.stringdata))
-        return static_cast<void*>(const_cast< registerWindow*>(this));
-    if (!strcmp(_clname, "Ui::registerWindow"))
-        return static_cast< Ui::registerWindow*>(const_cast< registerWindow*>(this));
-    return QWidget::qt_metacast(_clname);
+    if (!strcmp(_clname, qt_meta_stringdata_chatWindow.stringdata))
+        return static_cast<void*>(const_cast< chatWindow*>(this));
+    if (!strcmp(_clname, "Ui::chatWindow"))
+        return static_cast< Ui::chatWindow*>(const_cast< chatWindow*>(this));
+    return QMainWindow::qt_metacast(_clname);
 }
 
-int registerWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int chatWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

@@ -92,6 +92,8 @@ void *loginWindow::qt_metacast(const char *_clname)
     if (!_clname) return Q_NULLPTR;
     if (!strcmp(_clname, qt_meta_stringdata_loginWindow.stringdata))
         return static_cast<void*>(const_cast< loginWindow*>(this));
+    if (!strcmp(_clname, "Ui::loginWindow"))
+        return static_cast< Ui::loginWindow*>(const_cast< loginWindow*>(this));
     return QWidget::qt_metacast(_clname);
 }
 

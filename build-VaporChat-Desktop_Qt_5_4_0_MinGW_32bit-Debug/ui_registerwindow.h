@@ -18,6 +18,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -27,7 +28,10 @@ class Ui_registerWindow
 {
 public:
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_4;
+    QSpacerItem *horizontalSpacer;
     QLabel *iconLabel;
+    QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *horizontalLayout;
     QLabel *regUsernameLabel;
     QLineEdit *regUsernameEdit;
@@ -39,6 +43,7 @@ public:
     QLabel *regConfirmLabel;
     QLabel *regConPasswordLabel;
     QLineEdit *regConfirmPasswordEdit;
+    QLabel *errorLabel;
     QPushButton *registerButton;
 
     void setupUi(QWidget *registerWindow)
@@ -50,10 +55,31 @@ public:
         verticalLayout->setSpacing(9);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(6, 6, 6, 6);
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer);
+
         iconLabel = new QLabel(registerWindow);
         iconLabel->setObjectName(QStringLiteral("iconLabel"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(iconLabel->sizePolicy().hasHeightForWidth());
+        iconLabel->setSizePolicy(sizePolicy);
+        iconLabel->setMinimumSize(QSize(100, 100));
+        iconLabel->setMaximumSize(QSize(100, 100));
+        iconLabel->setLayoutDirection(Qt::LeftToRight);
 
-        verticalLayout->addWidget(iconLabel);
+        horizontalLayout_4->addWidget(iconLabel);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_2);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -61,13 +87,17 @@ public:
         regUsernameLabel->setObjectName(QStringLiteral("regUsernameLabel"));
         regUsernameLabel->setMinimumSize(QSize(0, 20));
         regUsernameLabel->setMaximumSize(QSize(16777215, 20));
+        QFont font;
+        font.setPointSize(12);
+        regUsernameLabel->setFont(font);
 
         horizontalLayout->addWidget(regUsernameLabel);
 
         regUsernameEdit = new QLineEdit(registerWindow);
         regUsernameEdit->setObjectName(QStringLiteral("regUsernameEdit"));
-        regUsernameEdit->setMinimumSize(QSize(200, 20));
-        regUsernameEdit->setMaximumSize(QSize(200, 20));
+        regUsernameEdit->setMinimumSize(QSize(170, 30));
+        regUsernameEdit->setMaximumSize(QSize(170, 30));
+        regUsernameEdit->setFont(font);
 
         horizontalLayout->addWidget(regUsernameEdit);
 
@@ -80,18 +110,17 @@ public:
         regPasswordLabel->setObjectName(QStringLiteral("regPasswordLabel"));
         regPasswordLabel->setMinimumSize(QSize(0, 20));
         regPasswordLabel->setMaximumSize(QSize(16777215, 20));
+        regPasswordLabel->setFont(font);
 
         horizontalLayout_2->addWidget(regPasswordLabel);
 
         regPasswordLineEdit = new QLineEdit(registerWindow);
         regPasswordLineEdit->setObjectName(QStringLiteral("regPasswordLineEdit"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(regPasswordLineEdit->sizePolicy().hasHeightForWidth());
         regPasswordLineEdit->setSizePolicy(sizePolicy);
-        regPasswordLineEdit->setMinimumSize(QSize(200, 20));
-        regPasswordLineEdit->setMaximumSize(QSize(200, 20));
+        regPasswordLineEdit->setMinimumSize(QSize(170, 30));
+        regPasswordLineEdit->setMaximumSize(QSize(170, 30));
+        regPasswordLineEdit->setFont(font);
         regPasswordLineEdit->setEchoMode(QLineEdit::Password);
 
         horizontalLayout_2->addWidget(regPasswordLineEdit);
@@ -106,11 +135,13 @@ public:
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         regConfirmLabel = new QLabel(registerWindow);
         regConfirmLabel->setObjectName(QStringLiteral("regConfirmLabel"));
+        regConfirmLabel->setFont(font);
 
         verticalLayout_2->addWidget(regConfirmLabel);
 
         regConPasswordLabel = new QLabel(registerWindow);
         regConPasswordLabel->setObjectName(QStringLiteral("regConPasswordLabel"));
+        regConPasswordLabel->setFont(font);
 
         verticalLayout_2->addWidget(regConPasswordLabel);
 
@@ -121,8 +152,9 @@ public:
         regConfirmPasswordEdit->setObjectName(QStringLiteral("regConfirmPasswordEdit"));
         sizePolicy.setHeightForWidth(regConfirmPasswordEdit->sizePolicy().hasHeightForWidth());
         regConfirmPasswordEdit->setSizePolicy(sizePolicy);
-        regConfirmPasswordEdit->setMinimumSize(QSize(200, 20));
-        regConfirmPasswordEdit->setMaximumSize(QSize(200, 20));
+        regConfirmPasswordEdit->setMinimumSize(QSize(170, 30));
+        regConfirmPasswordEdit->setMaximumSize(QSize(170, 30));
+        regConfirmPasswordEdit->setFont(font);
         regConfirmPasswordEdit->setEchoMode(QLineEdit::Password);
 
         horizontalLayout_3->addWidget(regConfirmPasswordEdit);
@@ -130,8 +162,21 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_3);
 
+        errorLabel = new QLabel(registerWindow);
+        errorLabel->setObjectName(QStringLiteral("errorLabel"));
+        sizePolicy.setHeightForWidth(errorLabel->sizePolicy().hasHeightForWidth());
+        errorLabel->setSizePolicy(sizePolicy);
+        errorLabel->setMinimumSize(QSize(262, 20));
+        errorLabel->setMaximumSize(QSize(262, 20));
+
+        verticalLayout->addWidget(errorLabel);
+
         registerButton = new QPushButton(registerWindow);
         registerButton->setObjectName(QStringLiteral("registerButton"));
+        sizePolicy.setHeightForWidth(registerButton->sizePolicy().hasHeightForWidth());
+        registerButton->setSizePolicy(sizePolicy);
+        registerButton->setMinimumSize(QSize(262, 30));
+        registerButton->setFont(font);
 
         verticalLayout->addWidget(registerButton);
 
@@ -143,13 +188,14 @@ public:
 
     void retranslateUi(QWidget *registerWindow)
     {
-        registerWindow->setWindowTitle(QApplication::translate("registerWindow", "Form", 0));
+        registerWindow->setWindowTitle(QApplication::translate("registerWindow", "Register", 0));
         iconLabel->setText(QString());
         regUsernameLabel->setText(QApplication::translate("registerWindow", "Username:", 0));
         regPasswordLabel->setText(QApplication::translate("registerWindow", "Password:", 0));
         regConfirmLabel->setText(QApplication::translate("registerWindow", "Confirm", 0));
         regConPasswordLabel->setText(QApplication::translate("registerWindow", "Password:", 0));
         regConfirmPasswordEdit->setText(QString());
+        errorLabel->setText(QString());
         registerButton->setText(QApplication::translate("registerWindow", "Register", 0));
     } // retranslateUi
 

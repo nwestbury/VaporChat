@@ -20,21 +20,19 @@ win32{
 
 SOURCES += main.cpp\
         mainwindow.cpp\
-        registerwindow.cpp \
-    loginwindow.cpp
+        registerwindow.cpp\
+        loginwindow.cpp \
+    chatwindow.cpp
 
 HEADERS  += mainwindow.h\
-         registerwindow.h \
-    loginwindow.h
-
-<<<<<<< HEAD
+         registerwindow.h\
+         loginwindow.h \
+    chatwindow.h
 
 FORMS    += mainwindow.ui\
-         registerwindow.ui \
-    loginwindow.ui
-=======
-FORMS    += mainwindow.ui
+         registerwindow.ui\
+         loginwindow.ui \
+    chatwindow.ui
 
 RESOURCES += \
     ressources.qrc
->>>>>>> 14c952b6c218c185fec60e1ada9c1d8977c672ec
