@@ -5,6 +5,7 @@
 #include "ui_loginwindow.h"
 #include "registerwindow.h"
 #include "chatwindow.h"
+#include <QNetworkReply>
 
 class loginWindow : public QWidget, Ui::loginWindow
 {
@@ -21,6 +22,8 @@ private:
 private slots:
     void login();
     void openRegisterWindow();
+public slots:
+    void postRecieved(QNetworkReply* reply);
 };
 
 #endif // LOGINWINDOW_H

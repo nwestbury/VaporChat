@@ -22,11 +22,6 @@ mainWindow::mainWindow()
 
     setupUi(this);
 
-<<<<<<< HEAD
-=======
-    logWin.show();
-
->>>>>>> b0f720e5ed41cbedb803242666fc7dccf8365e32
     for(int i=0; i<friends.size(); ++i){
         QListWidgetItem *item = new QListWidgetItem (QIcon(":img/online.png"), friends.at(i), friendList);
         friendList->addItem(item);
