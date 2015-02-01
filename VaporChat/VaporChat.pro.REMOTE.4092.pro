@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,23 +20,20 @@ win32{
 
 SOURCES += main.cpp\
         mainwindow.cpp\
-        registerwindow.cpp\
-        loginwindow.cpp\
-    	chatwindow.cpp\
-	networking.cpp \
-    	crypto.cpp
+        registerwindow.cpp \
+    loginwindow.cpp \
+    networking.cpp \
+    crypto.cpp
 
 HEADERS  += mainwindow.h\
-         registerwindow.h\
-         loginwindow.h \
-    	 chatwindow.h\
-	 networking.h\
-    	 crypto.h
+         registerwindow.h \
+    loginwindow.h \
+    networking.h \
+    crypto.h
 
 FORMS    += mainwindow.ui\
-         registerwindow.ui\
-         loginwindow.ui \
-    	 chatwindow.ui
+         registerwindow.ui \
+    loginwindow.ui
 
 RESOURCES += \
     ressources.qrc
