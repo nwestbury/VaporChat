@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\registerwindow.o
+./release\loginwindow.o
+./release\chatwindow.o
+./release\qrc_ressources.o
+./release\moc_mainwindow.o
+./release\moc_registerwindow.o
+./release\moc_loginwindow.o
+./release\moc_chatwindow.o
+);

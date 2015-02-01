@@ -21,22 +21,18 @@ win32{
 SOURCES += main.cpp\
         mainwindow.cpp\
         registerwindow.cpp\
-        loginwindow.cpp\
-    	chatwindow.cpp\
-	networking.cpp \
-    	crypto.cpp
+        loginwindow.cpp \
+    chatwindow.cpp
 
 HEADERS  += mainwindow.h\
          registerwindow.h\
          loginwindow.h \
-    	 chatwindow.h\
-	 networking.h\
-    	 crypto.h
+    chatwindow.h
 
 FORMS    += mainwindow.ui\
          registerwindow.ui\
          loginwindow.ui \
-    	 chatwindow.ui
+    chatwindow.ui
 
 RESOURCES += \
     ressources.qrc
