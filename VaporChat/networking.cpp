@@ -32,6 +32,7 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
      QString urlString = "http://107.181.166.77/" + file;
 
      request.setUrl(QUrl(urlString));
+     request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/x-www-form-urlencoded"));
      request.setRawHeader("User-Agent", "FakeBrowser 1.0");
 
     QUrlQuery params;

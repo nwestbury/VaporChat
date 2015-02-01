@@ -24,6 +24,8 @@ private slots:
     void openRegisterWindow();
 public slots:
     void postRecieved(QNetworkReply* reply);
+signals:
+    void loginSuccessful();
 };
 
 #endif // LOGINWINDOW_H

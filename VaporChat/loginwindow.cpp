@@ -92,5 +92,9 @@ void loginWindow::postRecieved( QNetworkReply* reply){
         QString rsa = a.at(i+1).toString();
         friendHash[name] = rsa;
     }
+    emit loginSuccessful();
+}
+
+void loginSuccessful(){
 
 }

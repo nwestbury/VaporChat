@@ -33,6 +33,7 @@ mainWindow::mainWindow() {
     //friendList->sortingEnabled(true);
 
     connect(friendList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(onItemClicked(QListWidgetItem*)));
+    connect(&logWin, SIGNAL(loginSuccessful()), this, SLOT(swapLogin()));
 }
 
 mainWindow::~mainWindow()
@@ -41,6 +42,11 @@ mainWindow::~mainWindow()
 
 void mainWindow::getFriendList(){
     friends << "Nico" << "James" << "Nathan";
+}
+
+void mainWindow::swapLogin(){
+    logWin.hide();
+    this->show();
 }
 
 void mainWindow::postRecieved( QNetworkReply* reply){

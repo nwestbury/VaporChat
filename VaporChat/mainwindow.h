@@ -13,6 +13,7 @@ class mainWindow : public QMainWindow, Ui::mainWindow
 {
     Q_OBJECT
     QStringList friends;
+    loginWindow logWin;
     QHash<QString, chatWindow*> childWindows;
 
     public:
@@ -25,6 +26,7 @@ class mainWindow : public QMainWindow, Ui::mainWindow
      public slots:
         void postRecieved(QNetworkReply* reply);
         void onItemClicked(QListWidgetItem* item);
+        void swapLogin();
 
     /*signals:
         void message(const QString &username, const QString &text);
