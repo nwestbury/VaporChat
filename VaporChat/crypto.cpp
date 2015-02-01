@@ -146,7 +146,7 @@ void bin2hex(char *bin, int binlen, char **hexout)
     (*hexout)[binlen*2] = 0;
 }
 
-void hex2bin(char *hex, char **binout)
+/*void hex2bin(char *hex, char **binout)
 {
     char *a = "0123456789abcdef";
     int hexlen = strlen(hex);
@@ -158,8 +158,8 @@ void hex2bin(char *hex, char **binout)
         (*binout)[i] = hex[i*2+1];
     }
 
-    (*hexout)[binlen*2] = 0;
-}
+    (*binout)[binlen*2] = 0;
+}*/
 
 
 
