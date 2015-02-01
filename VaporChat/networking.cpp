@@ -2,7 +2,7 @@
 #include <QMessageBox>
 
 // Parameters is an array of strings where each even index is the key and each odd is the data
-void myNetwork::network(QString &file, QStringList &parameters, const char * funcName, QMainWindow *obj){
+void myNetwork::network(QString &file, QStringList &parameters, const char * funcName, QObject *obj){
 
     /*QFile file(":/ssl/certificate.crt");
     file.open(QIODevice::ReadOnly);

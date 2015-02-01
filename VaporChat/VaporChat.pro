@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = VaporChat
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -std=c++11
+
 win32{
     INCLUDEPATH += C:/OpenSSL-Win64/include
     LIBS += -L"C:/OpenSSL-Win64/lib" -llibeay32
@@ -22,7 +24,6 @@ SOURCES += main.cpp\
         mainwindow.cpp\
         registerwindow.cpp\
         loginwindow.cpp\
-    	chatwindow.cpp\
 	networking.cpp \
         crypto.cpp \
         chatwindow.cpp

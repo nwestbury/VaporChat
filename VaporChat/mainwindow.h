@@ -4,11 +4,14 @@
 #include <QMainWindow>
 #include <QNetworkReply>
 #include "ui_mainwindow.h"
+#include "loginwindow.h"
+
 
 class mainWindow : public QMainWindow, Ui::mainWindow
 {
     Q_OBJECT
     QStringList friends;
+    loginWindow logWin;
 
     public:
         mainWindow();
