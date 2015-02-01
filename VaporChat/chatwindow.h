@@ -9,14 +9,15 @@ class chatWindow : public QMainWindow, Ui::chatWindow
 {
     Q_OBJECT
 
+    QString sessionkey;
+    QStringList *msgArray = new QStringList;
+
 public:
-    explicit chatWindow(QWidget *parent = 0);
+    explicit chatWindow(QString title, QWidget *parent = 0);
     ~chatWindow();
 
 private:
     Ui::chatWindow *ui;
-    void updateDisplay();
-    QStringList *msgArray = new QStringList;
 
 private slots:
     void sendChat();

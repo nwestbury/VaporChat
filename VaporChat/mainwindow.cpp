@@ -5,6 +5,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "networking.h"
+#include "chatwindow.h"
 #include "openssl/rsa.h"
 
 mainWindow::mainWindow() {
@@ -30,6 +31,8 @@ mainWindow::mainWindow() {
 
     friendList->setSortingEnabled(true);
     //friendList->sortingEnabled(true);
+
+    connect(friendList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(onItemClicked(QListWidgetItem*)));
 }
 
 mainWindow::~mainWindow()
@@ -49,4 +52,14 @@ void mainWindow::postRecieved( QNetworkReply* reply){
     messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     messageBox.setDefaultButton(QMessageBox::No);
     messageBox.exec();
+}
+
+void mainWindow::onItemClicked(QListWidgetItem *item)
+{
+    QString frnd = item->text();
+
+    if(!childWindows.contains(frnd))
+        childWindows[frnd] = new chatWindow(frnd);
+    else
+        childWindows[frnd]->show();
 }

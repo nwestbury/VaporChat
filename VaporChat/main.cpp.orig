@@ -10,20 +10,9 @@
 
 
 void nathan_tests() {
-    //init_crypto();
+    init_crypto();
 
-<<<<<<< HEAD
-    //char *pub, *priv;
-    //createKeyPair("test", &pub, &priv);
-
-    //FILE *f = fopen("C:\\Users\\Jacob\\Documents\\build-VaporChat-Desktop_Qt_5_4_0_MSVC2013_64bit-Debug\\out.txt", "w");
-
-    //fprintf(f,"TESTESTEST%s\n%s", pub, priv);
-
-    //importKeyPair("test", privatekey, pubkey);
-=======
     QMessageBox msg;
->>>>>>> c917b1b08debee00566616d1c5139514892fa7fb
 
     /*char *hexout;
     bin2hex("test123 test 123", 18, &hexout);
@@ -38,13 +27,19 @@ void nathan_tests() {
     msg.exec();*/
 
     char keybuf[32] = {0};
-    generateRandAESKey(keybuf, sizeof(keybuf));
+    EVP_CIPHER_CTX ekey, dkey;
 
-    char *hexkey;
-    bin2hex(keybuf, 32, &hexkey);
+    generateKeyRandBytes(keybuf, sizeof(keybuf));
+    AES_InitKeys((unsigned char *)keybuf, sizeof(keybuf), &ekey, &dkey);
+
+    char text[] = "abcdefghijklmnopqrstuvwxyz";
+    int msglen = sizeof(text);
+    char *cyphertext, *plaintext;
+    AESEncrypt(&ekey, (unsigned char *)text, (unsigned char **)&cyphertext, &msglen);
+    AESDecrypt(&dkey, (unsigned char *)cyphertext, (unsigned char **)&plaintext, &msglen);
 
     msg.setTextInteractionFlags(Qt::TextSelectableByMouse);
-    msg.setText(hexkey);
+    msg.setText(plaintext);
     msg.exec();
 }
 
@@ -53,11 +48,13 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     mainWindow w;
+<<<<<<< HEAD
     w.show();
-
+=======
+>>>>>>> b0f720e5ed41cbedb803242666fc7dccf8365e32
 	
-    if(strcmp(getenv("USERNAME"), "Jacob") == 0)
-        nathan_tests();
+    //if(strcmp(getenv("USERNAME"), "Jacob") == 0)
+    //nathan_tests();
 
     return a.exec();
 }
