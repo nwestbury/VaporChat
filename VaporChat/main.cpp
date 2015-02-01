@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "networking.h"
 #include <QApplication>
+#include <QMessageBox>
 
 
 #include "crypto.h"
@@ -48,7 +49,7 @@ Rme6Xi7iAhlJtZu0bLxUkTCMzw==\n-----END ENCRYPTED PRIVATE KEY-----\n";
 extern RSA *rsa;
 
 void nathan_tests() {
-    init_crypto();
+    //init_crypto();
 
     //char *pub, *priv;
     //createKeyPair("test", &pub, &priv);
@@ -57,7 +58,7 @@ void nathan_tests() {
 
     //fprintf(f,"TESTESTEST%s\n%s", pub, priv);
 
-    importKeyPair("test", privatekey, pubkey);
+    //importKeyPair("test", privatekey, pubkey);
 
     char *str = "Test testes test";
     char *encrypted, *decrypted;
