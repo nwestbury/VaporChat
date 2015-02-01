@@ -1,9 +1,11 @@
 #include <QPixmap>
 #include <QRect>
+#include <QMessageBox>
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
 
 #include "registerwindow.h"
+#include "networking.h"
 
 loginWindow::loginWindow(QWidget *parent) :
     QWidget(parent),
@@ -37,13 +39,20 @@ void loginWindow::login()
         return;
     }
 
+    myNetwork *n = new myNetwork(this);
+    QString filename = QString::fromUtf8("login.php");
+    QStringList l;
+    l << "username" << username;
+    l << "password" << password;
+
+    n->network(filename, l, SLOT(postRecieved(QNetworkReply*)), this);
+
+
     //Check if inputs are valid here
 
 
     //Forward to chat window
-
-    //this->hide();
-    cWindow.show();
+    //cWindow.show();
 }
 
 void loginWindow::openRegisterWindow()
@@ -54,4 +63,16 @@ void loginWindow::openRegisterWindow()
 loginWindow::~loginWindow()
 {
     delete ui;
+}
+
+void loginWindow::postRecieved( QNetworkReply* reply){
+    QByteArray bytes = reply->readAll();
+    QString str = QString::fromUtf8(bytes.data(), bytes.size());
+    int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+    if(str.startsWith("Fail")){
+        QMessageBox messageBox;
+        messageBox.setText(str);
+        messageBox.exec();
+    }
 }

@@ -4,6 +4,7 @@
 
 #include "registerwindow.h"
 #include "ui_registerwindow.h"
+#include "networking.h"
 
 registerWindow::registerWindow(QWidget *parent) :
     QWidget(parent),
@@ -36,14 +37,35 @@ void registerWindow::execRegister()
     }
 
     //Check if passwords match
-    if(strcmp(password.toLocal8Bit(), confirm.toLocal8Bit())){
+    if(password == confirm){
         ui->errorLabel->setHidden(false);
         ui->errorLabel->setText("*Error: Passwords don't match");
         return;
     }
+
+    myNetwork *n = new myNetwork(this);
+    QString filename = QString::fromUtf8("createUser.php");
+    QStringList l;
+    l << "username" << username;
+    l << "password" << password;
+
+    n->network(filename, l, SLOT(postRecieved(QNetworkReply*)), this);
+
 }
 
 registerWindow::~registerWindow()
 {
     delete ui;
+}
+
+void registerWindow::postRecieved( QNetworkReply* reply){
+    QByteArray bytes = reply->readAll();
+    QString str = QString::fromUtf8(bytes.data(), bytes.size());
+    int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+    if(str.startsWith("Fail")){
+        QMessageBox messageBox;
+        messageBox.setText(str);
+        messageBox.exec();
+    }
 }

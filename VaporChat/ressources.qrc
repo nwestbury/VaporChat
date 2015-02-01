@@ -3,7 +3,6 @@
         <file>hidden.png</file>
         <file>offline.png</file>
         <file>online.png</file>
-        <file>smokeicon.png</file>
         <file>VaporIcon.png</file>
     </qresource>
     <qresource prefix="/ssl">

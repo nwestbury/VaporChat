@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "ui_registerwindow.h"
+#include <QNetworkReply>
 
 class registerWindow : public QWidget, Ui::registerWindow
 {
@@ -17,6 +18,8 @@ private:
 
 private slots:
     void execRegister();
+public slots:
+    void postRecieved(QNetworkReply*);
 };
 
 #endif // REGISTERWINDOW_H

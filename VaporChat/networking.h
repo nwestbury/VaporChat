@@ -13,7 +13,7 @@ class myNetwork : public QObject
 {
     Q_OBJECT
     public:
-        void network(QString &file, QStringList &parameters, const char * funcName, QMainWindow * obj);
+        void network(QString &file, QStringList &parameters, const char * funcName, QObject *obj);
 
         myNetwork(QObject *parent) {
             this->setParent(parent);
