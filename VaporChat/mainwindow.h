@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QNetworkReply>
 #include <QHash>
+#include <QThread>
 #include "ui_mainwindow.h"
 #include "loginwindow.h"
 #include "openssl/rsa.h"
@@ -23,6 +24,7 @@ class mainWindow : public QMainWindow, Ui::mainWindow
     private:
         Ui::mainWindow *ui;
         void getFriendList();
+        QThread * t = new QThread;
      public slots:
         void postRecieved(QNetworkReply* reply);
         void onItemClicked(QListWidgetItem* item);
