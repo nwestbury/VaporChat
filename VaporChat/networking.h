@@ -5,7 +5,7 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QUrlQuery>
 #include <QtNetwork/QNetworkAccessManager>
-#include <QNetworkReply>
+#include <QtNetwork/QNetworkReply>
 
 class myNetwork : public QObject
 {

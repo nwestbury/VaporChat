@@ -22,12 +22,14 @@ SOURCES += main.cpp\
         mainwindow.cpp\
         registerwindow.cpp \
     loginwindow.cpp \
-    networking.cpp
+    networking.cpp \
+    crypto.cpp
 
 HEADERS  += mainwindow.h\
          registerwindow.h \
     loginwindow.h \
-    networking.h
+    networking.h \
+    crypto.h
 
 FORMS    += mainwindow.ui\
          registerwindow.ui \

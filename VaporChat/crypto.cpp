@@ -29,7 +29,7 @@ void init_crypto() {
 
 
 //returns the keys in PEM format in the respective buffers. Caller must free() the buffers after use.
-void createKeyPair(char *password, char *pub_out, char *priv_out)
+void createKeyPair(char *password, char **pub_out, char **priv_out)
 {
     QMessageBox errbox;
 
@@ -62,19 +62,13 @@ void createKeyPair(char *password, char *pub_out, char *priv_out)
     int size_priv = BIO_get_mem_data(bp_priv, &priv_str);
     int size_pub = BIO_get_mem_data(bp_pub, &pub_str);
 
-    priv_out = (char *)malloc(size_priv+1);
-    pub_out = (char *)malloc(size_pub+1);
+    *priv_out = (char *)malloc(size_priv+1);
+    *pub_out = (char *)malloc(size_pub+1);
 
-    memcpy(priv_out, priv_str, size_priv);
-    memcpy(pub_out, pub_str, size_pub);
-    priv_out[size_priv] = 0;
-    pub_out[size_pub] = 0;
-
-    errbox.setText(pub_out);
-    errbox.exec();
-
-    errbox.setText(priv_out);
-    errbox.exec();
+    memcpy(*priv_out, priv_str, size_priv);
+    memcpy(*pub_out, pub_str, size_pub);
+    (*priv_out)[size_priv] = 0;
+    (*pub_out)[size_pub] = 0;
 
     goto done;
 err:
@@ -85,5 +79,36 @@ done:
     BIO_free(bp_priv);
     BIO_free(bp_pub);
 }
+
+//imports pem keys into the user's RSA struct
+void importKeyPair(char *privatePassword, char *privatekey, char *publickey) {
+    BIO *pubk = BIO_new_mem_buf(publickey, -1);
+    BIO *privk = BIO_new_mem_buf(privatekey, -1);
+
+    if(pubk == NULL) {
+        QMessageBox errbox;
+        errbox.setText(ERR_error_string(ERR_get_error(), 0));
+        errbox.exec();
+    }
+
+    if(!PEM_read_bio_RSA_PUBKEY(pubk, &rsa, NULL, NULL)) {
+        QMessageBox errbox;
+        errbox.setText(ERR_error_string(ERR_get_error(), 0));
+        errbox.exec();
+    }
+
+    if(!PEM_read_bio_RSAPrivateKey(privk, &rsa, 0, privatePassword)) {
+        QMessageBox errbox;
+        errbox.setText(ERR_error_string(ERR_get_error(), 0));
+        errbox.exec();
+    }
+
+    if(!RSA_check_key(rsa)) {
+        QMessageBox errbox;
+        errbox.setText(ERR_error_string(ERR_get_error(), 0));
+        errbox.exec();
+    }
+}
+
 
 

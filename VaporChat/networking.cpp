@@ -5,7 +5,7 @@ void myNetwork::network(){
 
      QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 
-     // Read the SSL certificate
+     /*// Read the SSL certificate
      QFile file(":/ssl/api.xyz.com.crt");
      file.open(QIODevice::ReadOnly);
      const QByteArray bytes = file.readAll();
@@ -14,7 +14,7 @@ void myNetwork::network(){
      const QSslCertificate certificate(bytes);
 
      // Add this certificate to all SSL connections
-     QSslSocket::addDefaultCaCertificate(certificate);
+     QSslSocket::addDefaultCaCertificate(certificate);*/
 
      connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
 
