@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QMessageBox>
 
+
 #include "crypto.h"
 #include "stdio.h"
 
@@ -40,8 +41,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    loginWindow w;
+    mainWindow w;
     w.show();
+
 	
     if(strcmp(getenv("USERNAME"), "Jacob") == 0)
         nathan_tests();
