@@ -56,7 +56,6 @@ void loginWindow::login()
 
     n->network(filename, l, SLOT(postRecieved(QNetworkReply*)), this);
 
-
     //Check if inputs are valid here
 }
 

@@ -12,7 +12,7 @@ chatWindow::chatWindow(QString title, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle(title + "Chat");
+    this->setWindowTitle(title);
     ui->userLabel->setText(title);
 
     QTimer *timer = new QTimer(this);

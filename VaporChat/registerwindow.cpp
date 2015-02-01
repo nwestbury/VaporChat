@@ -50,7 +50,6 @@ void registerWindow::execRegister()
     l << "password" << password;
 
     n->network(filename, l, SLOT(postRecieved(QNetworkReply*)), this);
-
 }
 
 registerWindow::~registerWindow()
