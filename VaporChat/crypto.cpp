@@ -130,19 +130,56 @@ void RSADecrypt(RSA *privatekey, char *in, int inlen, char **out, int *len) {
 ////////////////    AES CODE    ////////////////
 
 //Generates a 256bit random key
-int generateRandAESKey(char *buf, int buflen)
+int generateKeyRandBytes(char *buf, int buflen)
 {
     if(buflen != 32)
         return 0;
 
-    if(!RAND_bytes((unsigned char *)buf, buflen)) error();
+    if(!RAND_bytes((unsigned char *)buf, 32)) error();
     return 1;
 }
 
-//AESEncrypt() {
+int AES_InitKeys(unsigned char *key_data, int key_data_len, EVP_CIPHER_CTX *e_ctx,
+EVP_CIPHER_CTX *d_ctx)
+{
+    int nrounds = 5;
+    unsigned char key[32], iv[32] = {0};
 
+    if(!EVP_BytesToKey(EVP_aes_256_cbc(), EVP_sha1(), 0, key_data, key_data_len, nrounds, key, iv))
+        error();
 
-//}
+    EVP_CIPHER_CTX_init(e_ctx);
+    EVP_EncryptInit_ex(e_ctx, EVP_aes_256_cbc(), NULL, key, iv);
+
+    EVP_CIPHER_CTX_init(d_ctx);
+    EVP_DecryptInit_ex(d_ctx, EVP_aes_256_cbc(), NULL, key, iv);
+    return 0;
+}
+
+void AESEncrypt(EVP_CIPHER_CTX *key, unsigned char *plaintext, unsigned char **cypher, int *len)
+{
+    int c_len = *len + AES_BLOCK_SIZE, f_len = 0;
+    *cypher = (unsigned char *)malloc(c_len);
+
+    EVP_EncryptInit_ex(key, NULL, NULL, NULL, NULL);
+
+    EVP_EncryptUpdate(key, *cypher, &c_len, plaintext, *len);
+
+    EVP_EncryptFinal_ex(key, *cypher+c_len, &f_len);
+    *len = c_len + f_len;
+}
+
+void AESDecrypt(EVP_CIPHER_CTX *key, unsigned char *ciphertext, unsigned char **plaintext, int *len)
+{
+    // plaintext will always be equal to or lesser than length of ciphertext
+    int p_len = *len, f_len = 0;
+
+    *plaintext = (unsigned char *)malloc(p_len);
+    EVP_DecryptInit_ex(key, NULL, NULL, NULL, NULL);
+    EVP_DecryptUpdate(key, *plaintext, &p_len, ciphertext, *len);
+    EVP_DecryptFinal_ex(key, *plaintext+p_len, &f_len);
+    *len = p_len + f_len;
+}
 
 
 ////////////////    OTHER CRYPTO CODE    ////////////////
