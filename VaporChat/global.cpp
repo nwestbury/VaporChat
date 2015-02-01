@@ -7,5 +7,5 @@
 QHash<QString, QString> friendHash;
 QString privateKey;
 QString publicKey;
-QString username;
+QString g_username;
 

@@ -52,6 +52,7 @@ void loginWindow::login()
     QStringList l;
     l << "username" << username;
     l << "password" << password;
+    g_username = username;
 
     n->network(filename, l, SLOT(postRecieved(QNetworkReply*)), this);
 

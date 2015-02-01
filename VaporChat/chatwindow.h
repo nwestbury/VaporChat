@@ -2,6 +2,7 @@
 #define CHATWINDOW_H
 
 #include <QMainWindow>
+#include <QNetworkReply>
 
 #include "ui_chatwindow.h"
 
@@ -21,6 +22,8 @@ private:
 
 private slots:
     void sendChat();
+    void update();
+    void postRecieved(QNetworkReply*);
 };
 
 #endif // CHATWINDOW_H

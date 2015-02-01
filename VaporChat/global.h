@@ -9,7 +9,7 @@ QT_BEGIN_NAMESPACE
 extern QHash<QString, QString> friendHash;
 extern QString privateKey;
 extern QString publicKey;
-extern QString username;
+extern QString g_username;
 
 QT_END_NAMESPACE
 
