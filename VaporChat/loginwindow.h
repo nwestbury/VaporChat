@@ -14,7 +14,7 @@ class loginWindow : public QWidget, Ui::loginWindow
     chatWindow cWindow;
 
 public:
-    explicit loginWindow(QWidget *parent = 0);
+    loginWindow(QWidget *parent = 0);
     ~loginWindow();
 
 private:

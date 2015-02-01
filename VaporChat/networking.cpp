@@ -23,8 +23,8 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
      QNetworkAccessManager *manager = new QNetworkAccessManager(this);
      manager->setNetworkAccessible(QNetworkAccessManager::Accessible);
 
-      connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
-     //connect(manager, SIGNAL(finished(QNetworkReply*)), obj, funcName);
+      //connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+     connect(manager, SIGNAL(finished(QNetworkReply*)), obj, funcName);
 
      QNetworkRequest request;
 

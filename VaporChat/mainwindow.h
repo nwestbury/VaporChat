@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 #include <QNetworkReply>
+#include <QHash>
 #include "ui_mainwindow.h"
 #include "loginwindow.h"
+#include "openssl/rsa.h"
 
 
 class mainWindow : public QMainWindow, Ui::mainWindow

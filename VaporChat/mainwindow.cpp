@@ -7,19 +7,7 @@
 #include "networking.h"
 #include "openssl/rsa.h"
 
-typedef struct st_friend{
-    bool isOnline;
-    QString friendName;
-    RSA *pubkey;
-} myFriend;
-
-typedef struct st_childChatWindow{
-    QString sessionkey;
-    //chatWindow window;
-}childChatWindow;
-
-mainWindow::mainWindow()
-{
+mainWindow::mainWindow() {
     getFriendList();
 
     //loginWindow * loginWin = new loginWindow;

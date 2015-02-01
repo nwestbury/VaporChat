@@ -1,11 +1,19 @@
 #include <QPixmap>
 #include <QRect>
 #include <QMessageBox>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonValue>
+
+
 #include "loginwindow.h"
+#include "mainwindow.h"
 #include "ui_loginwindow.h"
 
 #include "registerwindow.h"
 #include "networking.h"
+
+#include "global.h"
 
 loginWindow::loginWindow(QWidget *parent) :
     QWidget(parent),
@@ -74,5 +82,19 @@ void loginWindow::postRecieved( QNetworkReply* reply){
         QMessageBox messageBox;
         messageBox.setText(str);
         messageBox.exec();
+        return;
     }
+
+    QJsonDocument d = QJsonDocument::fromJson(bytes);
+    QJsonArray a = d.array();
+
+    privateKey = a.at(0).toString();
+    publicKey = a.at(1).toString();
+
+    for(int i=2; i<a.size(); i+=2){
+        QString name = a.at(i).toString();
+        QString rsa = a.at(i+1).toString();
+        friendHash[name] = rsa;
+    }
+
 }
