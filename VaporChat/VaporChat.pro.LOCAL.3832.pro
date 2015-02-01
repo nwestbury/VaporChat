@@ -11,16 +11,28 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = VaporChat
 TEMPLATE = app
 
-win32-msvc*: {
+win32{
     INCLUDEPATH += C:/OpenSSL-Win64/include
     LIBS += -L"C:/OpenSSL-Win64/lib" -llibeay32
 } else {
-    LIBS += -llibeay32
+    LIBS += -lssl -lcrypto
 }
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp\
+        registerwindow.cpp\
+        loginwindow.cpp \
+    chatwindow.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h\
+         registerwindow.h\
+         loginwindow.h \
+    chatwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui\
+         registerwindow.ui\
+         loginwindow.ui \
+    chatwindow.ui
+
+RESOURCES += \
+    ressources.qrc

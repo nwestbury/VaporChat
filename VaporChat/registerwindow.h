@@ -2,12 +2,9 @@
 #define REGISTERWINDOW_H
 
 #include <QWidget>
+#include "ui_registerwindow.h"
 
-namespace Ui {
-class registerWindow;
-}
-
-class registerWindow : public QWidget
+class registerWindow : public QWidget, Ui::registerWindow
 {
     Q_OBJECT
 
