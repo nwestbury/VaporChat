@@ -32,6 +32,7 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
      QString urlString = "http://107.181.166.77/" + file;
 
      request.setUrl(QUrl(urlString));
+     request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/x-www-form-urlencoded"));
      request.setRawHeader("User-Agent", "FakeBrowser 1.0");
 
     QUrlQuery params;
@@ -48,7 +49,7 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
             this, SLOT(error(QList<QSslError>)));
 }
 
-/*void myNetwork::replyFinished(QNetworkReply *reply){
+void myNetwork::replyFinished(QNetworkReply *reply){
     QByteArray bytes = reply->readAll();
     QString str = QString::fromUtf8(bytes.data(), bytes.size());
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -57,7 +58,7 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
     messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     messageBox.setDefaultButton(QMessageBox::No);
     messageBox.exec();
-}*/
+}
 
 void myNetwork::error(const QList<QSslError> err){
     QMessageBox msgBox;

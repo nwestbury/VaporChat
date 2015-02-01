@@ -13,7 +13,7 @@ class loginWindow : public QWidget, Ui::loginWindow
     registerWindow regWindow;
 
 public:
-    explicit loginWindow(QWidget *parent = 0);
+    loginWindow(QWidget *parent = 0);
     ~loginWindow();
 
 private:
@@ -24,6 +24,8 @@ private slots:
     void openRegisterWindow();
 public slots:
     void postRecieved(QNetworkReply* reply);
+signals:
+    void loginSuccessful();
 };
 
 #endif // LOGINWINDOW_H

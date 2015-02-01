@@ -26,14 +26,16 @@ SOURCES += main.cpp\
         loginwindow.cpp\
 	networking.cpp \
         crypto.cpp \
-        chatwindow.cpp
+        chatwindow.cpp \
+    global.cpp
 
 HEADERS  += mainwindow.h\
          registerwindow.h\
          loginwindow.h \
     	 chatwindow.h\
 	 networking.h\
-    	 crypto.h
+    	 crypto.h \
+    global.h
 
 FORMS    += mainwindow.ui\
          registerwindow.ui\
