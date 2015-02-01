@@ -23,8 +23,8 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
      QNetworkAccessManager *manager = new QNetworkAccessManager(this);
      manager->setNetworkAccessible(QNetworkAccessManager::Accessible);
 
-      connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
-     //connect(manager, SIGNAL(finished(QNetworkReply*)), obj, funcName);
+     //connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+     connect(manager, SIGNAL(finished(QNetworkReply*)), obj, funcName);
 
      QNetworkRequest request;
 
@@ -48,7 +48,7 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
             this, SLOT(error(QList<QSslError>)));
 }
 
-void myNetwork::replyFinished(QNetworkReply *reply){
+/*void myNetwork::replyFinished(QNetworkReply *reply){
     QByteArray bytes = reply->readAll();
     QString str = QString::fromUtf8(bytes.data(), bytes.size());
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -57,7 +57,7 @@ void myNetwork::replyFinished(QNetworkReply *reply){
     messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     messageBox.setDefaultButton(QMessageBox::No);
     messageBox.exec();
-}
+}*/
 
 void myNetwork::error(const QList<QSslError> err){
     QMessageBox msgBox;

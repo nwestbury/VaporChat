@@ -20,7 +20,7 @@ class myNetwork : public QObject
         }
 
     private slots:
-        void replyFinished(QNetworkReply *reply);
+        //void replyFinished(QNetworkReply *reply);
         void error(const QList<QSslError> err);
 };
 

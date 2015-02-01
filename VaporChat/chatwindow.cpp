@@ -7,7 +7,7 @@ chatWindow::chatWindow(QString title, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle(title + "Chat");
+    this->setWindowTitle(title);
     ui->userLabel->setText(title);
 
     connect(ui->sendButton, SIGNAL(clicked(bool)), this, SLOT(sendChat()));

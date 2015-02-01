@@ -202,7 +202,7 @@ void sha256(char *in, char out[65])
     SHA256_Final(hash, &ctx);
     int i = 0;
     for(i = 0; i < SHA256_DIGEST_LENGTH; ++i){
-        sprintf(outputBuffer + (i * 2), "%02x", hash[i]);
+        sprintf(out + (i * 2), "%02x", hash[i]);
     }
     out[64] = 0;
 }
