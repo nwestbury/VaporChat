@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "networking.h"
 #include <QApplication>
+#include <QMessageBox>
 
 
 #include "crypto.h"
@@ -44,6 +45,8 @@ ZKUM+pQQxhhECeJ0zgxMWpuwUlLn53m+RHZGmWkLBRGGUCBjK+okNLGcOqJBQ9dT\n\
 Q/0ZQdkEqrxUuzNp2CiHDwIysZ/nFFWBf3Tb2BNqenO3uCpTxgs+TskNcLlkJuro\n\
 Rme6Xi7iAhlJtZu0bLxUkTCMzw==\n-----END ENCRYPTED PRIVATE KEY-----\n";
 
+extern RSA *rsa;
+
 void nathan_tests() {
     init_crypto();
 
@@ -56,6 +59,26 @@ void nathan_tests() {
 
     importKeyPair("test", privatekey, pubkey);
 
+    char *str = "Test testes test";
+    char *encrypted, *decrypted;
+    int cryptedlen, decryptedLen;
+
+    RSAEncrypt(rsa, str, strlen(str)+1, &encrypted, &cryptedlen);
+    RSADecrypt(rsa, encrypted, cryptedlen, &decrypted, &decryptedLen);
+
+    free(encrypted);
+
+    QMessageBox msg;
+    msg.setText(decrypted);
+    msg.exec();
+
+    free(decrypted);
+
+    char *hexout;
+    bin2hex("test", 4, &hexout);
+
+    msg.setText(hexout);
+    msg.exec();
 }
 
 int main(int argc, char *argv[])
