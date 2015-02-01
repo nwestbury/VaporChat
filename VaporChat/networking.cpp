@@ -49,7 +49,7 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
             this, SLOT(error(QList<QSslError>)));
 }
 
-void myNetwork::replyFinished(QNetworkReply *reply){
+/*void myNetwork::replyFinished(QNetworkReply *reply){
     QByteArray bytes = reply->readAll();
     QString str = QString::fromUtf8(bytes.data(), bytes.size());
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -58,7 +58,7 @@ void myNetwork::replyFinished(QNetworkReply *reply){
     messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     messageBox.setDefaultButton(QMessageBox::No);
     messageBox.exec();
-}
+}*/
 
 void myNetwork::error(const QList<QSslError> err){
     QMessageBox msgBox;

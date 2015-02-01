@@ -12,7 +12,6 @@
 #include "chatwindow.h"
 #include "openssl/rsa.h"
 
-
 QString frnd;
 
 typedef struct st_friend{
@@ -63,7 +62,7 @@ void mainWindow::swapLogin(){
     this->show();
 }
 
-void mainWindow::postRecieved( QNetworkReply* reply){
+/*void mainWindow::postRecieved( QNetworkReply* reply){
     QByteArray bytes = reply->readAll();
     QString str = QString::fromUtf8(bytes.data(), bytes.size());
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -72,7 +71,7 @@ void mainWindow::postRecieved( QNetworkReply* reply){
     messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     messageBox.setDefaultButton(QMessageBox::No);
     messageBox.exec();
-}
+}*/
 
 void mainWindow::onItemClicked(QListWidgetItem *item)
 {
@@ -113,8 +112,10 @@ void mainWindow::postRecieved(QNetworkReply* reply){
 
     QStringList::iterator it = childWindows[frnd]->msgArray->begin();
     childWindows[frnd]->ui->textEdit->setText("");
-    while (it != childWindows[frnd]->msgArray->end()) {
-        childWindows[frnd]->ui->textEdit->append(*it);
+
+    while (it < childWindows[frnd]->msgArray->end()) {
+        childWindows[frnd]->ui->textEdit->setText("");
+        childWindows[frnd]->ui->textEdit->appended(*it);
         ++it;
     }
 }
