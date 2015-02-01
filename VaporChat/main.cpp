@@ -27,13 +27,19 @@ void nathan_tests() {
     msg.exec();*/
 
     char keybuf[32] = {0};
-    generateRandAESKey(keybuf, sizeof(keybuf));
+    EVP_CIPHER_CTX ekey, dkey;
 
-    char *hexkey;
-    bin2hex(keybuf, 32, &hexkey);
+    generateKeyRandBytes(keybuf, sizeof(keybuf));
+    AES_InitKeys((unsigned char *)keybuf, sizeof(keybuf), &ekey, &dkey);
+
+    char text[] = "abcdefghijklmnopqrstuvwxyz";
+    int msglen = sizeof(text);
+    char *cyphertext, *plaintext;
+    AESEncrypt(&ekey, (unsigned char *)text, (unsigned char **)&cyphertext, &msglen);
+    AESDecrypt(&dkey, (unsigned char *)cyphertext, (unsigned char **)&plaintext, &msglen);
 
     msg.setTextInteractionFlags(Qt::TextSelectableByMouse);
-    msg.setText(hexkey);
+    msg.setText(plaintext);
     msg.exec();
 }
 
