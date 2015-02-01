@@ -14,10 +14,14 @@
 #include <openssl/err.h>
 #include <openssl/conf.h>
 #include <openssl/rand.h>
+#include <openssl/sha.h>
 
 
 RSA *rsa;//key pair
 const int def_padding = RSA_PKCS1_OAEP_PADDING;
+
+
+
 
 
 ////////////////    BOILERPLATE CODE    ////////////////
@@ -36,6 +40,8 @@ void init_crypto() {
     //initialize singletons
     rsa = RSA_new();
 }
+
+
 
 
 
@@ -127,6 +133,7 @@ void RSADecrypt(RSA *privatekey, char *in, int inlen, char **out, int *len) {
 
 
 
+
 ////////////////    AES CODE    ////////////////
 
 //Generates a 256bit random key
@@ -139,8 +146,7 @@ int generateKeyRandBytes(char *buf, int buflen)
     return 1;
 }
 
-int AES_InitKeys(unsigned char *key_data, int key_data_len, EVP_CIPHER_CTX *e_ctx,
-EVP_CIPHER_CTX *d_ctx)
+int AES_InitKeys(unsigned char *key_data, int key_data_len, EVP_CIPHER_CTX *e_ctx, EVP_CIPHER_CTX *d_ctx)
 {
     int nrounds = 5;
     unsigned char key[32], iv[32] = {0};
@@ -182,6 +188,29 @@ void AESDecrypt(EVP_CIPHER_CTX *key, unsigned char *ciphertext, unsigned char **
 }
 
 
+
+
+
+////////////////    HASHING CODE    ////////////////
+
+void sha256(char *in, char out[65])
+{
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256_CTX ctx;
+    SHA256_Init(&ctx);
+    SHA256_Update(&ctx, in, strlen(in));
+    SHA256_Final(hash, &ctx);
+    int i = 0;
+    for(i = 0; i < SHA256_DIGEST_LENGTH; ++i){
+        sprintf(outputBuffer + (i * 2), "%02x", hash[i]);
+    }
+    out[64] = 0;
+}
+
+
+
+
+
 ////////////////    OTHER CRYPTO CODE    ////////////////
 
 void bin2hex(char *bin, int binlen, char **hexout)
@@ -215,6 +244,7 @@ void hex2bin(char *hex, unsigned char **binout)
 
     (*binout)[binlen*2] = 0;
 }
+
 
 
 
