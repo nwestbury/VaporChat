@@ -1,0 +1,60 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2015-01-31T12:06:43
+#
+#-------------------------------------------------
+
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = VaporChat
+TEMPLATE = app
+
+win32{
+    INCLUDEPATH += C:/OpenSSL-Win64/include
+    LIBS += -L"C:/OpenSSL-Win64/lib" -llibeay32
+} else {
+    LIBS += -lssl -lcrypto
+}
+
+SOURCES += main.cpp\
+<<<<<<< HEAD
+<<<<<<< HEAD
+        mainwindow.cpp \
+    networking.cpp
+
+HEADERS  += mainwindow.h \
+    networking.h
+=======
+=======
+>>>>>>> 04680fef31e9a58d6fd02be8e8e387b71c9b77a5
+        mainwindow.cpp\
+        registerwindow.cpp \
+    loginwindow.cpp
+
+HEADERS  += mainwindow.h\
+         registerwindow.h \
+    loginwindow.h
+<<<<<<< HEAD
+>>>>>>> c76aeba128d5647acd286b7ca33d190336781f8a
+
+<<<<<<< HEAD
+=======
+>>>>>>> 04680fef31e9a58d6fd02be8e8e387b71c9b77a5
+
+FORMS    += mainwindow.ui\
+         registerwindow.ui \
+    loginwindow.ui
+<<<<<<< HEAD
+=======
+FORMS    += mainwindow.ui
+
+RESOURCES += \
+    ressources.qrc
+>>>>>>> 14c952b6c218c185fec60e1ada9c1d8977c672ec
+=======
+
+RESOURCES += \
+    ressources.qrc
+>>>>>>> 04680fef31e9a58d6fd02be8e8e387b71c9b77a5

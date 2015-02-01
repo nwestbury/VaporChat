@@ -24,7 +24,8 @@ SOURCES += main.cpp\
         loginwindow.cpp\
     	chatwindow.cpp\
 	networking.cpp \
-    	crypto.cpp
+        crypto.cpp \
+        chatwindow.cpp
 
 HEADERS  += mainwindow.h\
          registerwindow.h\

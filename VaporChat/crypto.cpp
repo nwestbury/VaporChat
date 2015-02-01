@@ -7,12 +7,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "openssl/bio.h"
-#include "openssl/aes.h"
-#include "openssl/rsa.h"
-#include "openssl/pem.h"
+#include <openssl/bio.h>
+#include <openssl/aes.h>
+#include <openssl/rsa.h>
+#include <openssl/pem.h>
 #include <openssl/err.h>
 #include <openssl/conf.h>
+#include <openssl/rand.h>
 
 
 RSA *rsa;//key pair
@@ -128,7 +129,20 @@ void RSADecrypt(RSA *privatekey, char *in, int inlen, char **out, int *len) {
 
 ////////////////    AES CODE    ////////////////
 
+//Generates a 256bit random key
+int generateRandAESKey(char *buf, int buflen)
+{
+    if(buflen != 32)
+        return 0;
 
+    if(!RAND_bytes((unsigned char *)buf, buflen)) error();
+    return 1;
+}
+
+//AESEncrypt() {
+
+
+//}
 
 
 ////////////////    OTHER CRYPTO CODE    ////////////////
@@ -139,27 +153,30 @@ void bin2hex(char *bin, int binlen, char **hexout)
     *hexout = (char *)malloc(binlen*2+1);
 
     for(int i = 0; i < binlen; ++i) {
-        (*hexout)[i*2] = a[bin[i] >> 4];
-        (*hexout)[i*2+1] = a[(bin[i] & 0xF)];
+        (*hexout)[i*2] = a[(unsigned char)bin[i] >> 4];
+        (*hexout)[i*2+1] = a[(unsigned char)(bin[i] & 0xF)];
     }
 
     (*hexout)[binlen*2] = 0;
 }
 
-/*void hex2bin(char *hex, char **binout)
+void hex2bin(char *hex, unsigned char **binout)
 {
     char *a = "0123456789abcdef";
     int hexlen = strlen(hex);
     int binlen = hexlen/2;
     *binout = (char *)malloc(strlen(hex)*2);
 
+    char character[2] = {0};
     for(int i = 0; i < hexlen; ++i) {
-        (*binout)[i] = (hex[i*2]-'a');
-        (*binout)[i] = hex[i*2+1];
+        character[0] = (hex[i*2]);
+        (*binout)[i] = (strstr(a, character)-a) << 4;
+        character[0] = (hex[i*2+1]);
+        (*binout)[i] = (*binout)[i] | (strstr(a, character)-a);
     }
 
     (*binout)[binlen*2] = 0;
-}*/
+}
 
 
 

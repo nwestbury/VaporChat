@@ -13,15 +13,28 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
     const QList<QSslCertificate> list;
     list << certificate;
 
+<<<<<<< HEAD
     // Add this certificate to all SSL connections
     QSslConfiguration sslConfig;
     sslConfig.setLocalCertificate(certificate);
     sslConfig.setCaCertificates(list);
     sslConfig.setProtocol(QSsl::TlsV1_2);
     QSslSocket::addDefaultCaCertificate(certificate);*/
+=======
+     /*// Read the SSL certificate
+     QFile file(":/ssl/api.xyz.com.crt");
+     file.open(QIODevice::ReadOnly);
+     const QByteArray bytes = file.readAll();
+>>>>>>> 656de4d293d9a1ead7fc5401c92788f289a93260
 
+
+<<<<<<< HEAD
      QNetworkAccessManager *manager = new QNetworkAccessManager(this);
      manager->setNetworkAccessible(QNetworkAccessManager::Accessible);
+=======
+     // Add this certificate to all SSL connections
+     QSslSocket::addDefaultCaCertificate(certificate);*/
+>>>>>>> 656de4d293d9a1ead7fc5401c92788f289a93260
 
       connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
      //connect(manager, SIGNAL(finished(QNetworkReply*)), obj, funcName);
@@ -46,6 +59,8 @@ void myNetwork::network(QString &file, QStringList &parameters, const char * fun
 
     connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
             this, SLOT(error(QList<QSslError>)));
+    connect(reply, SIGNAL(finished()), this, SLOT(foo()));
+
 }
 
 void myNetwork::replyFinished(QNetworkReply *reply){
