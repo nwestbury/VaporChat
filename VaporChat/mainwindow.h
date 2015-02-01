@@ -3,12 +3,15 @@
 
 #include <QMainWindow>
 #include <QNetworkReply>
+#include <QLinkedList>
 #include "ui_mainwindow.h"
+#include "chatwindow.h"
 
 class mainWindow : public QMainWindow, Ui::mainWindow
 {
     Q_OBJECT
     QStringList friends;
+    QHash<QString, chatWindow*> childWindows;
 
     public:
         mainWindow();
@@ -19,6 +22,7 @@ class mainWindow : public QMainWindow, Ui::mainWindow
         void getFriendList();
      public slots:
         void postRecieved(QNetworkReply* reply);
+        void onItemClicked(QListWidgetItem* item);
 
     /*signals:
         void message(const QString &username, const QString &text);

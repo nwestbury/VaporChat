@@ -56,8 +56,8 @@ public:
         userLabel->setObjectName(QStringLiteral("userLabel"));
         QFont font;
         font.setPointSize(14);
-        font.setBold(true);
         font.setWeight(75);
+        font.setBold(false);
         userLabel->setFont(font);
 
         horizontalLayout->addWidget(userLabel);

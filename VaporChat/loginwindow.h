@@ -10,7 +10,6 @@ class loginWindow : public QWidget, Ui::loginWindow
 {
     Q_OBJECT
     registerWindow regWindow;
-    chatWindow cWindow;
 
 public:
     explicit loginWindow(QWidget *parent = 0);

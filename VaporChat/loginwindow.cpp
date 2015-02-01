@@ -39,11 +39,6 @@ void loginWindow::login()
 
     //Check if inputs are valid here
 
-
-    //Forward to chat window
-
-    //this->hide();
-    cWindow.show();
 }
 
 void loginWindow::openRegisterWindow()

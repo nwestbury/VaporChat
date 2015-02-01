@@ -148,7 +148,7 @@ int generateRandAESKey(char *buf, int buflen)
 ////////////////    OTHER CRYPTO CODE    ////////////////
 void bin2hex(char *bin, int binlen, char **hexout)
 {
-    char *a = "0123456789abcdef";
+    const char *a = "0123456789abcdef";
 
     *hexout = (char *)malloc(binlen*2+1);
 
@@ -162,7 +162,7 @@ void bin2hex(char *bin, int binlen, char **hexout)
 
 void hex2bin(char *hex, unsigned char **binout)
 {
-    char *a = "0123456789abcdef";
+    const char *a = "0123456789abcdef";
     int hexlen = strlen(hex);
     int binlen = hexlen/2;
     *binout = (unsigned char *)malloc(strlen(hex)*2);
