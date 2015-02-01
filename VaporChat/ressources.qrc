@@ -5,4 +5,7 @@
         <file>online.png</file>
         <file>smokeicon.png</file>
     </qresource>
+    <qresource prefix="/ssl">
+        <file>certificate.crt</file>
+    </qresource>
 </RCC>

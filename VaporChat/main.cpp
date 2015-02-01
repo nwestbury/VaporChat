@@ -2,7 +2,6 @@
 #include "mainwindow.h"
 #include "networking.h"
 #include <QApplication>
-#include <QMessageBox>
 
 
 #include "crypto.h"
@@ -47,9 +46,6 @@ int main(int argc, char *argv[])
 	
     if(strcmp(getenv("USERNAME"), "Jacob") == 0)
         nathan_tests();
-
-    //myNetwork n;
-    //n.network();
 
     return a.exec();
 }

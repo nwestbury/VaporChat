@@ -5,9 +5,13 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QUrlQuery>
 #include <QtNetwork/QNetworkAccessManager>
+<<<<<<< HEAD
 #include <QNetworkReply>
 #include <QMainWindow>
 
+=======
+#include <QtNetwork/QNetworkReply>
+>>>>>>> 656de4d293d9a1ead7fc5401c92788f289a93260
 
 class myNetwork : public QObject
 {

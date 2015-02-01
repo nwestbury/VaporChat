@@ -22,6 +22,7 @@ SOURCES += main.cpp\
         mainwindow.cpp\
         registerwindow.cpp\
         loginwindow.cpp\
+    	chatwindow.cpp\
 	networking.cpp \
         crypto.cpp \
         chatwindow.cpp
@@ -29,14 +30,14 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h\
          registerwindow.h\
          loginwindow.h \
+    	 chatwindow.h\
 	 networking.h\
-         crypto.h \
-         chatwindow.h
+    	 crypto.h
 
 FORMS    += mainwindow.ui\
          registerwindow.ui\
          loginwindow.ui \
-         chatwindow.ui
+    	 chatwindow.ui
 
 RESOURCES += \
     ressources.qrc
